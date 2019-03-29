@@ -13,7 +13,7 @@ import SystemReport from '../components/6.systemReport/systemReport' //系统报
 import CheckCalendar from '../components/7.checkManage/checkCalendar' //巡检日历
 import CheckPlan from '../components/7.checkManage/checkPlan' //巡检计划
 import Knowledge from '../components/8.knowledge/knowledge' //知识库
-
+import SortConfig from '../components/9.sortConfig/sortConfig' //层级设置
 
 Vue.use(Router)
 
@@ -83,6 +83,11 @@ export default new Router({
           path: '/knowledge',
           component: Knowledge,
         },
+        {
+          name: '层级设置',
+          path: '/sortConfig',
+          component: SortConfig,
+        }
       ]
     }
   ]

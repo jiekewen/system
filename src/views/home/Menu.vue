@@ -56,6 +56,10 @@
           <span slot="title" style="font-size:14px">巡检计划</span>
         </el-menu-item>
       </el-submenu>
+      <el-menu-item class="nav-menu-item" index="/sortConfig">
+        <i class="el-icon-setting"></i>
+        <span slot="title">层级设置</span>
+      </el-menu-item>
       <el-menu-item class="nav-menu-item" index="/knowledge">
         <i class="el-icon-setting"></i>
         <span slot="title">知&nbsp;&nbsp;识&nbsp;&nbsp;库</span>

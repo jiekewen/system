@@ -45,6 +45,6 @@ var interval = setInterval(function() {
 .center {
   display: flex;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
 }
 </style>

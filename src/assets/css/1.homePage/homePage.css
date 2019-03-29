@@ -1,0 +1,85 @@
+.homePage {
+  display: flex;
+  margin: 10px;
+}
+.homePage .icon-box {
+  padding-top: 5%;
+  padding-left: 10%;
+  font-size: 24px;
+  color: #fff;
+}
+.homePage .icon-box-number {
+  padding-top: 5%;
+  padding-left: 10%;
+  font-size: 50px;
+  color: #fff;
+}
+.homePage .homePage-leftHalf {
+  width: 50%;
+  margin-right: 2.5%;
+}
+.homePage .homePage-leftHalf .leftHalf-top {
+  width: 100%;
+  display: flex;
+}
+.homePage .homePage-leftHalf .leftHalf-top .leftHalf-top-first {
+  width: 50%;
+  height: 180px;
+  margin-right: 5%;
+  background-color: #67bcdf;
+}
+.homePage .homePage-leftHalf .leftHalf-top .leftHalf-top-second {
+  width: 50%;
+  height: 180px;
+  background-color: #61c3bb;
+}
+.homePage .homePage-leftHalf .leftHalf-map {
+  padding-top: 5%;
+}
+.homePage .homePage-rightHalf {
+  width: 50%;
+}
+.homePage .homePage-rightHalf .rightHalf-top {
+  width: 100%;
+  display: flex;
+}
+.homePage .homePage-rightHalf .rightHalf-top .rightHalf-top-first {
+  width: 50%;
+  height: 180px;
+  margin-right: 5%;
+  background-color: #e67d6f;
+}
+.homePage .homePage-rightHalf .rightHalf-top .rightHalf-top-second {
+  width: 50%;
+  height: 180px;
+  background-color: #e7a63f;
+}
+.homePage .homePage-rightHalf .rightHalf-ring {
+  padding-top: 1vh;
+  padding-left: 2vh;
+  margin-top: 5%;
+  height: 30vh;
+  background-color: #fff;
+}
+.homePage .homePage-rightHalf .rightHalf-ring p {
+  color: #666;
+  font-size: 16px;
+}
+.homePage .homePage-rightHalf .rightHalf-alarm {
+  margin-top: 4vh;
+  padding-top: 1vh;
+  padding-left: 2vh;
+  height: 30vh;
+  background-color: #fff;
+}
+.homePage .homePage-rightHalf .rightHalf-alarm p {
+  padding-bottom: 3vh;
+  color: #666;
+  font-size: 16px;
+}
+.homePage .homePage-rightHalf .rightHalf-alarm .alarm-marquee {
+  display: flex;
+}
+.homePage .homePage-rightHalf .rightHalf-alarm .alarm-marquee p {
+  font-size: 14px;
+}

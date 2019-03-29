@@ -2,24 +2,25 @@ html,
 body {
   height: 100%;
   width: 100%;
-
+  background-color: #e2e2e2;
 
   .home {
-    height: 100%;
+    height: 100vh;
     display: flex;
     width: 100%; // 导航
     min-width: 1100px;
 
     .nav {
-      height: 100%;
+      height: 100vh;
       width: 10%;
       min-width: 220px;
+      min-height: 800px;
       background-color: #14416E;
 
       .navLogo {
         padding-left: 10%;
-        height: 100px;
-        line-height: 100px;
+        height: 80px;
+        line-height: 80px;
 
         img {
           width: 90%;
@@ -31,19 +32,17 @@ body {
       }
     }
 
-
-
     // 主体
     .main {
-      width: 90%;
-      height: 100%;
+      width: 100%;
+      height: 100vh;
+      min-height: 800px;
       background-color: #E2E2E2;
 
       .header {
-        height: 100px;
-        line-height: 100px;
+        height: 80px;
+        line-height: 80px;
         background-color: #fff;
-        box-shadow: 0px 6px 5px 0px #888;
       }
     }
   }

@@ -7,7 +7,7 @@
     </el-col>
     <el-col :span="8">
       <div class="Header-box2">
-        <h1 class="box2-title">光谷电气监控中心</h1>
+        <h1 class="box2-title">电气安全云平台系统</h1>
       </div>
     </el-col>
     <el-col :span="8">

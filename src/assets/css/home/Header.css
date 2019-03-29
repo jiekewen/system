@@ -1,18 +1,19 @@
 .Header-box1 {
-  min-height: 100px;
+  min-width: 300px;
+  min-height: 80px;
   padding-left: 30%;
 }
 .Header-box2 {
-  min-height: 100px;
+  min-height: 80px;
   text-align: center;
 }
 .Header-box2 .box2-title {
   font-family: "STZhongsong";
-  font-size: 32px;
+  font-size: 26px;
   font-weight: normal;
 }
 .Header-box3 {
-  min-height: 100px;
+  min-height: 80px;
   text-align: center;
   display: flex;
   padding-left: 50%;
