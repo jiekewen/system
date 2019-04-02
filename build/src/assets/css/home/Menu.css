@@ -1,0 +1,13 @@
+.NavMenu .NavMenu-box {
+  border: none;
+}
+.NavMenu .NavMenu-box .alarmManage {
+  overflow: hidden;
+}
+.NavMenu .NavMenu-box .nav-menu-item {
+  padding-left: 10%;
+  font-size: 16px;
+}
+.NavMenu .NavMenu-box .nav-menu-item i {
+  margin-right: 10%;
+}

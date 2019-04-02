@@ -34,9 +34,9 @@ export default {
         },
         series: [
           {
-            center: ["40%", "40%"],
+            center: ["40%", "60%"],
             type: "pie",
-            radius: ["40%", "70%"],
+            radius: ["50%", "80%"],
             label: {
               normal: {
                 formatter: "{b|{b}:} {per|{d}%}",
