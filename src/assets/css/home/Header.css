@@ -1,15 +1,17 @@
 .Header-box1 {
   min-width: 300px;
   min-height: 80px;
-  padding-left: 30%;
+  padding-left: 20%;
+}
+.Header-box1 .progress-day {
+  color: #888;
 }
 .Header-box2 {
   min-height: 80px;
   text-align: center;
 }
 .Header-box2 .box2-title {
-  font-family: "STZhongsong";
-  font-size: 26px;
+  font-size: 24px;
   font-weight: normal;
 }
 .Header-box3 {
@@ -19,5 +21,13 @@
   padding-left: 50%;
 }
 .Header-box3 .box3-warn {
+  overflow: hidden;
+  height: 80px;
   width: 20%;
+}
+.Header-box3 .box3-warn .item-badge {
+  cursor: pointer;
+}
+.Header-box3 .box3-warn .item-btn {
+  border: none;
 }

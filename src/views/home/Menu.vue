@@ -2,7 +2,7 @@
   <div class="NavMenu">
     <el-menu
       class="NavMenu-box"
-      background-color="#14416E"
+      background-color="#2C3C51"
       text-color="#ddd"
       :default-active="$route.path"
       router
@@ -58,7 +58,7 @@
       </el-submenu>
       <el-menu-item class="nav-menu-item" index="/sortConfig">
         <i class="el-icon-setting"></i>
-        <span slot="title">层级设置</span>
+        <span slot="title">分类设置</span>
       </el-menu-item>
       <el-menu-item class="nav-menu-item" index="/knowledge">
         <i class="el-icon-setting"></i>

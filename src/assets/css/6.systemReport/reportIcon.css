@@ -1,0 +1,24 @@
+.first-box-title {
+  font-size: 22px;
+  text-align: center;
+  height: 60px;
+  line-height: 60px;
+  color: #fff;
+  background-color: #d19b7c;
+}
+.box-icon {
+  background-color: #fff;
+}
+.box-icon .box-icon-dataRing {
+  padding-top: 10%;
+}
+.box-icon .box-icon-dataRing span {
+  font-size: 16px;
+}
+.box-icon .box-icon-elButton {
+  padding-top: 10%;
+  padding-bottom: 10%;
+}
+.box-icon .box-icon-elButton .elButton {
+  font-size: 16px;
+}

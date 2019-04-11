@@ -8,7 +8,7 @@
           <input @keyup.13="handleLogin" type="text" placeholder="用户名" v-model="formData.username">
         </div>
         <div>
-          <label>密 码</label>
+          <label>密&nbsp;&nbsp;&nbsp;码</label>
           <input
             @keyup.13="handleLogin"
             type="password"

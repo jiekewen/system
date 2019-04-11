@@ -5,7 +5,12 @@
         <h3>层级配置列表</h3>
       </div>
       <div class="header-right">
-        <el-cascader @change="handleChange" class="sortConfig-cascader" :options="cascaderData"></el-cascader>
+        <el-cascader
+          @change="handleChange"
+          class="sortConfig-cascader"
+          :options="cascaderData"
+          change-on-select
+        ></el-cascader>
         <el-button @click="handleEdit" type="primary" plain>保存修改</el-button>
       </div>
     </div>
@@ -71,6 +76,7 @@
   </div>
 </template>
 <script>
+import { copyArray } from "./copyArray";
 export default {
   name: "sortConfig",
   data() {
@@ -138,7 +144,7 @@ export default {
       loading: false,
       pageTotal: 0, //分页总数
       pageNo: 1, //当前页
-      pageSize: 3, //每页显示数目
+      pageSize: 10, //每页显示数目
       pageList: [], //动态生成的每页展示的渲染数组
       totalList: [] //数据的总条数
     };
@@ -154,20 +160,14 @@ export default {
       await this.$http
         .get(`set/equipmentListByEid?page=${this.pageNo}&size=${2}`)
         .then(response => {
-          console.log("response", response);
-
           if (response.data.code == 0) {
             // this.tableData = res.data.data.content;
             const pageStart = this.pageNo * this.pageSize - this.pageSize;
             const pageEnd = this.pageNo * this.pageSize;
-            console.log("pageStart", pageStart);
-            console.log("pageEnd", pageEnd);
-
             this.totalList = response.data.data.content || [];
             this.pageTotal = this.totalList.length;
-            const tempArr = this.copyArray(this.totalList);
+            const tempArr = copyArray(this.totalList);
             this.pageList = tempArr.slice(pageStart, pageEnd);
-            console.log("this.pageList", this.pageList);
 
             this.tableData = this.pageList;
           } else {
@@ -179,30 +179,17 @@ export default {
     },
     //改变页码
     pageChange(val) {
-      console.log("parseInt(val)", parseInt(val));
       this.pageNo = parseInt(val);
       this.getTableList();
     },
-    copyArray(source) {
-      //深复制
-      let index = -1;
-      const length = source.length || 0;
-      let array = new Array(length);
-      while (++index < length) {
-        array[index] = source[index];
-      }
-      return array;
-    },
+
     // 级联选择器change事件
     handleChange(value) {
-      console.log(value);
       //把分类赋值checkedSelect
       this.checkedSelect = value;
     },
     //点击保存提交
     handleEdit(h) {
-      console.log("h", h);
-
       //判断是否选择了数据
       if (this.checkedRow.length == 0) {
         this.$alert("请先勾选数据", {
@@ -225,13 +212,10 @@ export default {
           confirmButtonText: "确定"
         });
       }
-
-      console.log(sendData, "sendData");
       //上传数据、分类
       this.$http
         .post("set/updateSetBatch", sendData)
         .then(res => {
-          console.log(res, "res");
           //选中数据、选择分类、返回状态码为0都满足
           if (
             res.data.code == 0 &&
@@ -272,9 +256,9 @@ export default {
         "enm",
         "tds",
         "tnm",
-        "vt"
-      ]);
-      console.log(resArr); //得到列表选中数据
+        "vt",
+        "id"
+      ]); //得到列表选中数据
       this.checkedRow = resArr;
     },
     // 筛选

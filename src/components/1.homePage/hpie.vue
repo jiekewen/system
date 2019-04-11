@@ -12,7 +12,7 @@ export default {
     this.$http.get("homePage/eType").then(response => {
       let ringData = [];
       response.data.data.forEach(item => {
-        ringData.push({ name: item.enm, value: item.count });
+        ringData.push({ name: item.type, value: item.count });
       });
       this.receiveData = ringData;
       this.drawRing();
@@ -25,7 +25,7 @@ export default {
       drawRing.setOption({
         tooltip: {
           trigger: "item",
-          formatter: "{a} <br/>{b}: {c} ({d}%)"
+          formatter: "{b}: {c}"
         },
         legend: {
           orient: "vertical",
@@ -34,12 +34,12 @@ export default {
         },
         series: [
           {
-            center: ["40%", "40%"],
+            center: ["40%", "50%"],
             type: "pie",
             radius: ["40%", "70%"],
             label: {
               normal: {
-                formatter: "{b|{b}:} {per|{d}%}",
+                formatter: "{b|{b}:} {per|  {d}%}",
                 padding: [0, 4],
                 rich: {
                   b: {

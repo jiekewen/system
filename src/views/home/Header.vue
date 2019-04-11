@@ -2,7 +2,8 @@
   <el-row>
     <el-col :span="8">
       <div class="Header-box1">
-        <Date></Date>
+        <!-- <Date></Date> -->
+        <div class="progress-day">安全运行{{onLineDays}}天</div>
       </div>
     </el-col>
     <el-col :span="8">
@@ -13,13 +14,25 @@
     <el-col :span="8">
       <div class="Header-box3">
         <div class="box3-warn">
-          <img src="../../assets/images/home/u50.png" alt>
+          <router-link :to="{ path: 'messageList' }">
+            <img src="../../assets/images/home/alerm-count-icon.png" alt>
+          </router-link>
+        </div>
+        <div>
+          <router-link :to="{ path: 'messageList' }">
+            <el-badge :value="alerm.count" class="item-badge"></el-badge>
+          </router-link>
         </div>
         <div class="box3-warn">
-          <img src="../../assets/images/home/u55.png" alt>
+          <router-link :to="{ path: 'user' }">
+            <img src="../../assets/images/home/user-icon.png" alt>
+          </router-link>
+        </div>
+        <div class="user-name">
+          <router-link :to="{ path: 'user' }">{{this.$store.state.user}}</router-link>
         </div>
         <div class="box3-warn">
-          <img src="../../assets/images/home/u57.png" alt>
+          <img src="../../assets/images/home/set-message-icon.png" alt>
         </div>
       </div>
     </el-col>
@@ -29,10 +42,23 @@
 import Date from "./Date";
 export default {
   data() {
-    return {};
+    return {
+      alerm: {
+        count: 0
+      },
+      onLineDays: ""
+    };
   },
   components: {
     Date
+  },
+  created() {
+    this.$http.get("homePage/UnReadCount").then(res => {
+      this.alerm.count = res.data.data;
+    }),
+      this.$http.get("homePage/getOnLineDays").then(res => {
+        this.onLineDays = res.data.data;
+      });
   }
 };
 </script>

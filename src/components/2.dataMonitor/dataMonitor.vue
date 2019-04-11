@@ -6,7 +6,8 @@ export default {
   name: "DataMonitor",
   data() {
     return {};
-  }
+  },
+  methods: {}
 };
 </script>
 <style lang="less" scoped>

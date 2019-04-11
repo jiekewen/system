@@ -13,6 +13,10 @@ export default {
     initMap() {
       this.createMap(); //创建地图
     },
+    addMarker(point) {
+      var marker = new BMap.Marker(point);
+      map.addOverlay(marker);
+    },
     // 创建地图
     createMap() {
       var map = new BMap.Map("drawMap"); //在百度地图容器中创建一个地图
@@ -34,6 +38,9 @@ export default {
         border: "1px solid orange"
       });
       map.addOverlay(label);
+      var point = new BMap.Point(116.404, 39.915);
+      var marker = new BMap.Marker(point); // 创建标注
+      map.addOverlay(marker);
     }
   }
 };

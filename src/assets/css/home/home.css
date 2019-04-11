@@ -17,7 +17,7 @@ body .home .nav {
   width: 10%;
   min-width: 220px;
   min-height: 800px;
-  background-color: #14416E;
+  background-color: #2C3C51;
 }
 html .home .nav .navLogo,
 body .home .nav .navLogo {
@@ -31,7 +31,7 @@ body .home .nav .navLogo img {
 }
 html .home .nav .navWrap,
 body .home .nav .navWrap {
-  background-color: #14416E;
+  background-color: #2C3C51;
 }
 html .home .main,
 body .home .main {

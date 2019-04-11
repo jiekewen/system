@@ -14,6 +14,8 @@ import CheckCalendar from '../components/7.checkManage/checkCalendar' //巡检�
 import CheckPlan from '../components/7.checkManage/checkPlan' //巡检计划
 import Knowledge from '../components/8.knowledge/knowledge' //知识库
 import SortConfig from '../components/9.sortConfig/sortConfig' //层级设置
+import User from '../components/10.user/user'
+import ReportPrint from '../components/6.systemReport/reportPrint' //打印界面
 
 Vue.use(Router)
 
@@ -23,6 +25,11 @@ export default new Router({
       name: 'login',
       path: '/',
       component: Login,
+    },
+    {
+      name: 'reportPrint',
+      path: '/reportPrint',
+      component: ReportPrint,
     },
     {
       name: 'home',
@@ -87,6 +94,11 @@ export default new Router({
           name: '层级设置',
           path: '/sortConfig',
           component: SortConfig,
+        },
+        {
+          name: '用户设置',
+          path: '/user',
+          component: User,
         }
       ]
     }

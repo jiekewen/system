@@ -1,0 +1,43 @@
+.systemReport {
+  margin: 10px;
+  min-width: 1200px;
+}
+.systemReport .systemReport-up-half {
+  display: flex;
+  background-color: #fff;
+  height: 80px;
+  line-height: 80px;
+}
+.systemReport .systemReport-up-half .up-half-left {
+  width: 50%;
+}
+.systemReport .systemReport-up-half .up-half-left h3 {
+  padding-left: 2vw;
+}
+.systemReport .systemReport-up-half .up-half-right {
+  width: 50%;
+  padding-left: 40%;
+}
+.systemReport .systemReport-up-half .up-half-right span {
+  font-size: 16px;
+  margin-right: 2%;
+  margin-right: 5%;
+}
+.systemReport .systemReport-down-half {
+  padding-left: 5%;
+  text-align: center;
+}
+.systemReport .systemReport-down-half .down-half-box {
+  padding-top: 4%;
+  display: flex;
+}
+.systemReport .systemReport-down-half .down-half-box .half-box1 {
+  width: 29%;
+}
+.systemReport .systemReport-down-half .down-half-box .half-box2 {
+  width: 29%;
+  margin: 0 4%;
+}
+.systemReport .systemReport-down-half .down-half-box .half-box3 {
+  width: 29%;
+}
