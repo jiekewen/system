@@ -3,7 +3,7 @@
     <el-col :span="8">
       <div class="Header-box1">
         <!-- <Date></Date> -->
-        <div class="progress-day">安全运行{{onLineDays}}天</div>
+        <div class="progress-day">安全运行&nbsp;{{onLineDays}}&nbsp;天</div>
       </div>
     </el-col>
     <el-col :span="8">

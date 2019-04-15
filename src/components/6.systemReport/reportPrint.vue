@@ -12,7 +12,7 @@
         <el-table-column align="center" property="alermCount2" label="报警次数2"></el-table-column>
       </el-table>
     </div>
-    <div id="zz" class="reportPrint-btn">
+    <div id="reportPrintBtn">
       <el-button @click="returnReport" type="primary" plain>返回</el-button>
       <el-button @click="print" type="warning" plain>确认打印</el-button>
     </div>
@@ -36,8 +36,8 @@ export default {
       this.$router.push({ path: "/systemReport" });
     },
     async print() {
-      var zz = document.getElementById("zz");
-      zz.style.display = "none";
+      var reportPrintBtn = document.getElementById("reportPrintBtn");
+      reportPrintBtn.style.display = "none";
       window.print();
       await location.reload();
     }
@@ -61,7 +61,7 @@ export default {
       }
     }
   }
-  .reportPrint-btn {
+  #reportPrintBtn {
     margin-top: 10%;
     text-align: center;
   }

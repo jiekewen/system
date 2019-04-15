@@ -13,7 +13,9 @@ import qs from 'qs'
 Vue.prototype.$qs = qs
 Vue.prototype.$http = axios
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
-axios.defaults.baseURL = 'http://192.168.0.219:8002/netgate-server/'
+axios.defaults.baseURL = 'http://101.201.73.248:8002/netgate-server/'
+// 导入依赖包，解决ie不支持es6语法的兼容性问题
+import "babel-polyfill"
 // 引入echarts
 import echarts from 'echarts'
 Vue.prototype.$echarts = echarts;

@@ -91,7 +91,7 @@ export default {
     initWebSocket() {
       // 连接地址
       this.websock = new WebSocket(
-        "ws://192.168.0.219:8002/netgate-server/serverSocket/Root"
+        "ws://101.201.73.248:8002/netgate-server/serverSocket/Root"
       );
       this.websock.onopen = this.websocketonopen;
       this.websock.onerror = this.websocketonerror;
@@ -109,8 +109,8 @@ export default {
       // 接收数据
 
       let resData = e.data;
-      let a = 2; //JSON.parse(resData).oCount;
-      let b = 5; //JSON.parse(resData).eCount;
+      let a = parseInt(JSON.parse(resData).oCount);
+      let b = parseInt(JSON.parse(resData).eCount);
       this.offCount = b - a;
       this.onCount = a;
       this.$store.state.facility.onCount = a;

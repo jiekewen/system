@@ -20,7 +20,7 @@ import ReportPrint from '../components/6.systemReport/reportPrint' //打印界�
 Vue.use(Router)
 
 export default new Router({
-  mode: "history", //去掉#
+  //mode: "history", //去掉#
   routes: [{
       name: 'login',
       path: '/',

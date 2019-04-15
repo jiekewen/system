@@ -30,11 +30,12 @@ export default {
         legend: {
           orient: "vertical",
           x: "80%",
+          y: "20%",
           data: this.receiveData.name
         },
         series: [
           {
-            center: ["40%", "50%"],
+            center: ["40%", "60%"],
             type: "pie",
             radius: ["40%", "70%"],
             label: {
@@ -43,14 +44,14 @@ export default {
                 padding: [0, 4],
                 rich: {
                   b: {
-                    fontSize: 14,
+                    fontSize: 16,
                     lineHeight: 22
                   }
                 }
               }
             },
             data: this.receiveData,
-            color: ["#4cca76", "#3ba1e9", "#fa6b67", "#fec048"]
+            color: ["#4cca76", "#3ba1e9", "#fa6b67", "#fec048", "#909399"]
           }
         ]
       });
