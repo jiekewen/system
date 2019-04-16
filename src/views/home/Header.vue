@@ -1,8 +1,8 @@
 <template>
+  <!-- 页面头部 -->
   <el-row>
     <el-col :span="8">
       <div class="Header-box1">
-        <!-- <Date></Date> -->
         <div class="progress-day">安全运行&nbsp;{{onLineDays}}&nbsp;天</div>
       </div>
     </el-col>
@@ -19,11 +19,13 @@
           </router-link>
         </div>
         <div>
+          <!-- 报警数量 -->
           <router-link :to="{ path: 'messageList' }">
             <el-badge :value="alerm.count" class="item-badge"></el-badge>
           </router-link>
         </div>
         <div class="box3-warn">
+          <!-- 用户设置 -->
           <router-link :to="{ path: 'user' }">
             <img src="../../assets/images/home/user-icon.png" alt>
           </router-link>
@@ -39,7 +41,6 @@
   </el-row>
 </template>
 <script>
-import Date from "./Date";
 export default {
   data() {
     return {
@@ -49,19 +50,17 @@ export default {
       onLineDays: ""
     };
   },
-  components: {
-    Date
-  },
+  components: {},
   created() {
+    // 获取报警数量
     this.$http.get("homePage/UnReadCount").then(res => {
       this.alerm.count = res.data.data;
     }),
+      // 获取安全天数
       this.$http.get("homePage/getOnLineDays").then(res => {
         this.onLineDays = res.data.data;
       });
-  },
-
-  methods: {}
+  }
 };
 </script>
 <style lang="less" scoped>

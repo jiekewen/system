@@ -1,9 +1,12 @@
 <template>
+  <!-- 日累积量报表 -->
   <div class="dayReportList1">
+    <!-- 标题 -->
     <p class="first-box-title">日累积量报表</p>
     <div class="box-icon">
       <div class="box-icon-dataRing">
         <span>起始日期</span>
+        <!-- 日期选择 -->
         <el-date-picker
           format="yyyy年MM月dd日"
           value-format="yyyy-MM-dd"
@@ -43,6 +46,7 @@
         <!-- 查看弹窗 -->
         <el-dialog class="dialog-table" :title="dialogTitle" :visible.sync="dialogTableVisible">
           <el-table border :data="dialogDayData">
+            <!-- 弹出的渲染列表 -->
             <el-table-column align="center" property="eidDescription" label="项目名称"></el-table-column>
             <el-table-column align="center" property="ncount" label="接入设备"></el-table-column>
             <el-table-column align="center" property="ecount" label="设备总数"></el-table-column>
@@ -93,8 +97,8 @@ export default {
       dialogTableVisible: false
     };
   },
-  created() {},
   methods: {
+    // 查看
     dayReportRingView() {
       if (!this.$store.state.handleChangeData) {
         this.$alert("请先选择区域", "您没有选择区域", {
@@ -116,7 +120,7 @@ export default {
         let oCount = this.$store.state.facility.oCount;
         let eCount = this.$store.state.facility.eCount;
 
-        // 发送请求
+        // 需要的发送数据
         let daySendData = {};
         daySendData.switchhouse = handleValue[0];
         daySendData.category = handleValue[1];
@@ -126,7 +130,7 @@ export default {
         daySendData.endDate = this.dayReport.endDate;
         daySendData.cycle = 1;
         console.log("daySendData", daySendData);
-
+        // 发送请求
         this.$http
           .post("report/reportByDate", daySendData)
           .then(response => {
@@ -162,6 +166,7 @@ export default {
           });
       }
     },
+    // 下载
     dayReportRingDownload() {
       if (!this.$store.state.handleChangeData) {
         this.$alert("请先选择区域", "您没有选择区域", {
@@ -182,8 +187,7 @@ export default {
         const handleValue = this.$store.state.handleChangeData;
         let oCount = this.$store.state.facility.onCount;
         let eCount = this.$store.state.facility.offCount;
-        // 发送请求
-
+        // 需要的发送数据
         let daySendData = {};
         daySendData.switchhouse = handleValue[0];
         daySendData.category = handleValue[1];
@@ -193,7 +197,7 @@ export default {
         daySendData.endDate = this.dayReport.endDate;
         daySendData.cycle = 1;
         console.log("daySendData", daySendData);
-
+        // 发送请求
         this.$http
           .post("report/exportByDate", daySendData)
           .then(response => {
@@ -201,12 +205,13 @@ export default {
           })
           .catch(err => {
             console.log("err", err);
-            this.$alert("请求失败", "列表获取失败", {
+            this.$alert("请求失败", "下载失败", {
               confirmButtonText: "确定"
             });
           });
       }
     },
+    // 在线打印
     async dayReportRingPrint() {
       if (!this.$store.state.handleChangeData) {
         this.$alert("请先选择区域", "您没有选择区域", {
@@ -227,7 +232,7 @@ export default {
         const handleValue = this.$store.state.handleChangeData;
         let oCount = this.$store.state.facility.oCount;
         let eCount = this.$store.state.facility.eCount;
-        // 设置发送求情数据
+        // 设置发送数据
         let daySendData = {};
         daySendData.switchhouse = handleValue[0];
         daySendData.category = handleValue[1];
@@ -236,6 +241,7 @@ export default {
         daySendData.startDate = this.dayReportDate;
         daySendData.endDate = this.dayReportDate;
         daySendData.cycle = 1;
+        // 发送请求
         await this.$http
           .post("report/reportByDate", daySendData)
           .then(response => {
@@ -249,6 +255,7 @@ export default {
               dialogData.alermCount1 = resData.countResults[0].count;
               dialogData.alerm2 = resData.countResults[1].type;
               dialogData.alermCount2 = resData.countResults[1].count;
+              // 表格标题
               this.$store.state.dayPrintTitle =
                 this.dayReport.startDate +
                 " 至 " +
@@ -277,6 +284,7 @@ export default {
 </style>
 <style lang="less">
 .dayReportList1 {
+  // 查看的弹出框
   .dialog-table {
     .el-dialog__header {
       background-color: rgb(250, 236, 216);

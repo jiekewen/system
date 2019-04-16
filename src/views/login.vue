@@ -1,6 +1,6 @@
 <template>
   <div class="login">
-    login
+    <!-- 登陆 -->
     <div class="login-submit">
       <form :model="formData">
         <div class="login-user">
@@ -26,6 +26,7 @@ export default {
   name: "login",
   data() {
     return {
+      // 用户名密码
       formData: {
         username: "",
         password: ""
@@ -33,6 +34,7 @@ export default {
     };
   },
   methods: {
+    // 提交判断
     handleLogin() {
       if (this.formData.username !== "admin") {
         this.$alert("请输入正确用户名", "用户名不存在", {

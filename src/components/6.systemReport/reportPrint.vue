@@ -1,8 +1,10 @@
 <template>
+  <!-- 打印界面 -->
   <div class="reportPrint">
     <div class="reportPrint-table">
       <h3>{{printTitle}}</h3>
       <el-table border :data="dialogDayData">
+        <!-- 打印列表 -->
         <el-table-column align="center" property="eidDescription" label="项目名称"></el-table-column>
         <el-table-column align="center" property="ncount" label="接入设备"></el-table-column>
         <el-table-column align="center" property="ecount" label="设备总数"></el-table-column>
@@ -22,20 +24,24 @@
 export default {
   data() {
     return {
+      // 列表数据
       dialogDayData: [],
       printTitle: ""
     };
   },
   created() {
     this.dialogDayData = this.$store.state.dayPrint;
+    // 打印标题
     this.printTitle = this.$store.state.dayPrintTitle;
   },
   mounted() {},
   methods: {
     returnReport() {
+      // 返回跳转系统报表界面
       this.$router.push({ path: "/systemReport" });
     },
     async print() {
+      // 打印时隐藏不相关的按钮部分
       var reportPrintBtn = document.getElementById("reportPrintBtn");
       reportPrintBtn.style.display = "none";
       window.print();

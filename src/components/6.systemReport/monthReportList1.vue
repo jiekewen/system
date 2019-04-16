@@ -1,4 +1,5 @@
 <template>
+  <!-- 月累积量报表 -->
   <div class="monthReportList1">
     <p class="first-box-title" style="background-color:#7cb7d1">月累积量报表</p>
     <div class="box-icon">
@@ -43,6 +44,7 @@
         <!-- 查看弹窗 -->
         <el-dialog class="dialog-table" :title="dialogTitle" :visible.sync="dialogTableVisible">
           <el-table border :data="dialogMonthData">
+            <!-- 弹出的列表 -->
             <el-table-column align="center" property="eidDescription" label="项目名称"></el-table-column>
             <el-table-column align="center" property="ncount" label="接入设备"></el-table-column>
             <el-table-column align="center" property="ecount" label="设备总数"></el-table-column>
@@ -93,6 +95,7 @@ export default {
     };
   },
   methods: {
+    // 查看
     monthReportRingView() {
       if (!this.$store.state.handleChangeData) {
         this.$alert("请先选择区域", "您没有选择区域", {
@@ -123,7 +126,7 @@ export default {
 
         let oCount = this.$store.state.facility.oCount;
         let eCount = this.$store.state.facility.eCount;
-        // 发送请求
+        // 发送请求所需数据
         let monthSendData = {};
         monthSendData.switchhouse = handleValue[0];
         monthSendData.category = handleValue[1];
@@ -133,7 +136,7 @@ export default {
         monthSendData.endDate = gDate5;
         monthSendData.cycle = 2;
         console.log("monthSendData", monthSendData);
-
+        // 发送数据
         this.$http
           .post("report/reportByDate", monthSendData)
           .then(response => {
@@ -149,6 +152,7 @@ export default {
             let xx = [];
             xx.push(dialogData);
             this.dialogMonthData = xx;
+            // 弹窗标题
             this.dialogTitle =
               this.monthReport.startDate +
               " 至 " +
@@ -161,12 +165,13 @@ export default {
           })
           .catch(err => {
             console.log("err", err);
-            this.$alert("请求失败", "列表获取失败", {
+            this.$alert("请求失败", "获取列表失败", {
               confirmButtonText: "确定"
             });
           });
       }
     },
+    // 在线打印
     monthReportRingDownload() {
       if (!this.$store.state.handleChangeData) {
         this.$alert("请先选择区域", "您没有选择区域", {
@@ -196,7 +201,7 @@ export default {
         const gDate5 = this.monthReport.endDate + gDate4;
         let oCount = this.$store.state.facility.onCount;
         let eCount = this.$store.state.facility.offCount;
-        // 发送请求
+        // 发送请求所需数据
         let monthSendData = {};
         monthSendData.switchhouse = handleValue[0];
         monthSendData.category = handleValue[1];
@@ -206,7 +211,7 @@ export default {
         monthSendData.endDate = gDate5;
         monthSendData.cycle = 2;
         console.log("monthSendData", monthSendData);
-
+        // 发送请求
         this.$http
           .post("report/exportByDate", monthSendData)
           .then(response => {
@@ -214,7 +219,7 @@ export default {
           })
           .catch(err => {
             console.log("err", err);
-            this.$alert("请求失败", "列表获取失败", {
+            this.$alert("请求失败", "下载失败", {
               confirmButtonText: "确定"
             });
           });
@@ -249,7 +254,7 @@ export default {
         const gDate5 = this.monthReport.endDate + gDate4;
         let oCount = this.$store.state.facility.oCount;
         let eCount = this.$store.state.facility.eCount;
-        // 发送请求
+        // 请求所需数据
         let monthSendData = {};
         monthSendData.switchhouse = handleValue[0];
         monthSendData.category = handleValue[1];
@@ -258,6 +263,7 @@ export default {
         monthSendData.startDate = this.monthReport.startDate;
         monthSendData.endDate = gDate5;
         monthSendData.cycle = 2;
+        // 发送请求
         await this.$http
           .post("report/reportByDate", monthSendData)
           .then(response => {
@@ -271,6 +277,7 @@ export default {
               dialogData.alermCount1 = resData.countResults[0].count;
               dialogData.alerm2 = resData.countResults[1].type;
               dialogData.alermCount2 = resData.countResults[1].count;
+              // 标题部分
               this.$store.state.dayPrintTitle =
                 this.monthReport.startDate +
                 " 至 " +

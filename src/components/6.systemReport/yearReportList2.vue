@@ -1,9 +1,11 @@
 <template>
+  <!-- 年报表 -->
   <div class="yearReportList2">
     <p class="first-box-title" style="background-color:#ab7cd1">年报表</p>
     <div class="box-icon">
       <div class="box-icon-dataRing">
         <span>选择日期</span>
+        <!-- 日期选择 -->
         <el-date-picker
           format="yyyy年"
           value-format="yyyy-"
@@ -31,6 +33,7 @@
 
         <!-- 查看弹窗 -->
         <el-dialog class="dialog-table" :title="dialogTitle" :visible.sync="dialogTableVisible">
+          <!-- 弹出列表 -->
           <el-table border :data="dialogYearData">
             <el-table-column align="center" property="eidDescription" label="项目名称"></el-table-column>
             <el-table-column align="center" property="ncount" label="接入设备"></el-table-column>
@@ -49,7 +52,9 @@
 export default {
   data() {
     return {
+      // 日期选择值
       yearReportDate: "",
+      // 禁选日期
       pickerOptions: {
         disabledDate: time => {
           return time.getTime() > Date.now();
@@ -64,6 +69,7 @@ export default {
     };
   },
   methods: {
+    // 查看
     yearReportView() {
       if (!this.$store.state.handleChangeData) {
         this.$alert("请先选择区域", "您没有选择区域", {
@@ -81,7 +87,7 @@ export default {
         const yDateEnd = this.yearReportDate + "12-31";
         let oCount = this.$store.state.facility.oCount;
         let eCount = this.$store.state.facility.eCount;
-        // 发送请求
+        // 请求所需数据
         let yearSendData = {};
         yearSendData.switchhouse = handleValue[0];
         yearSendData.category = handleValue[1];
@@ -90,7 +96,7 @@ export default {
         yearSendData.startDate = yDateStart;
         yearSendData.endDate = yDateEnd;
         yearSendData.cycle = 6;
-        console.log("yearSendData", yearSendData);
+        // 发送请求
         this.$http
           .post("report/reportByDate", yearSendData)
           .then(response => {
@@ -103,6 +109,7 @@ export default {
             dialogData.alermCount1 = resData.countResults[0].count;
             dialogData.alerm2 = resData.countResults[1].type;
             dialogData.alermCount2 = resData.countResults[1].count;
+            // 弹出框的数据
             let xx = [];
             xx.push(dialogData);
             this.dialogYearData = xx;
@@ -114,7 +121,6 @@ export default {
               handleValue[1] +
               " 年报表";
             this.dialogTableVisible = true;
-            console.log("this.dialogDayData", this.dialogYearData);
           })
           .catch(err => {
             console.log("err", err);
@@ -124,6 +130,7 @@ export default {
           });
       }
     },
+    // 下载
     yearReportDownload() {
       if (!this.$store.state.handleChangeData) {
         this.$alert("请先选择区域", "您没有选择区域", {
@@ -141,7 +148,7 @@ export default {
         const yDateEnd = this.yearReportDate + "12-31";
         let oCount = this.$store.state.facility.oCount;
         let eCount = this.$store.state.facility.eCount;
-        // 发送请求
+        // 请求所需要数据
         let yearSendData = {};
         yearSendData.switchhouse = handleValue[0];
         yearSendData.category = handleValue[1];
@@ -150,7 +157,7 @@ export default {
         yearSendData.startDate = yDateStart;
         yearSendData.endDate = yDateEnd;
         yearSendData.cycle = 6;
-        console.log("yearSendData", yearSendData);
+        // 发送请求
         this.$http
           .post("report/exportByDate", yearSendData)
           .then(response => {
@@ -164,6 +171,7 @@ export default {
           });
       }
     },
+    // 在线打印
     async yearReportPrint() {
       if (!this.$store.state.handleChangeData) {
         this.$alert("请先选择区域", "您没有选择区域", {
@@ -181,7 +189,7 @@ export default {
         const yDateEnd = this.yearReportDate + "12-31";
         let oCount = this.$store.state.facility.oCount;
         let eCount = this.$store.state.facility.eCount;
-        // 发送请求
+        // 请求所需数据
         let yearSendData = {};
         yearSendData.switchhouse = handleValue[0];
         yearSendData.category = handleValue[1];
@@ -190,6 +198,7 @@ export default {
         yearSendData.startDate = yDateStart;
         yearSendData.endDate = yDateEnd;
         yearSendData.cycle = 6;
+        // 发送请求
         await this.$http
           .post("report/reportByDate", yearSendData)
           .then(response => {
@@ -203,6 +212,7 @@ export default {
               dialogData.alermCount1 = resData.countResults[0].count;
               dialogData.alerm2 = resData.countResults[1].type;
               dialogData.alermCount2 = resData.countResults[1].count;
+              // 弹出框标题
               this.$store.state.dayPrintTitle =
                 yDateStart +
                 " 至 " +

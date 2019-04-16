@@ -1,4 +1,5 @@
 <template>
+  <!-- 报警列表 -->
   <div class="alermList">
     <marquee
       onMouseOut="this.start()"
@@ -32,13 +33,13 @@
 export default {
   data() {
     return {
+      // 报警数据
       alermList1: "",
       alermList2: "",
       alermList3: "",
       alermList4: "",
       alermList5: "",
-      alermList6: "",
-      tableData: []
+      alermList6: ""
     };
   },
   created() {
@@ -50,6 +51,7 @@ export default {
     });
   },
   methods: {
+    // 报警数据拼接
     alermList() {
       this.alermList1 =
         this.tableData[0].switchhouse +

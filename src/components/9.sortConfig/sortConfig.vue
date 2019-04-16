@@ -1,4 +1,5 @@
 <template>
+  <!-- 分类设置 -->
   <div class="sortConfig">
     <div class="sortConfig-header">
       <div class="header-left">
@@ -27,10 +28,12 @@
         empty-text="数据为空"
         @selection-change="selects"
       >
+        <!-- 渲染列表 -->
         <el-table-column align="center" type="selection" width="55"></el-table-column>
         <el-table-column align="center" prop="bnm" label="通讯管理机"></el-table-column>
         <el-table-column align="center" prop="enm" label="名称"></el-table-column>
         <el-table-column align="center" prop="eds" label="描述"></el-table-column>
+        <!-- 筛选功能 -->
         <el-table-column
           align="center"
           prop="switchhouse"
@@ -39,6 +42,7 @@
           :filter-method="filterTag1"
           filter-placement="bottom-end"
         >
+          <!-- 筛选功能 -->
           <template slot-scope="scope">
             <el-tag
               :type="scope.row.switchhouse === '新工厂配电室' ? 'warning' : 'success'"
@@ -155,13 +159,12 @@ export default {
   },
   methods: {
     async getTableList() {
-      //this.tableData.splice(0); //this.tableData.length = 0
-      //let obj = { eid: this.currrentRoleId }; //动态设置请求id
+      //  发送请求
       await this.$http
         .get(`set/equipmentListByEid?page=${this.pageNo}&size=${2}`)
         .then(response => {
           if (response.data.code == 0) {
-            // this.tableData = res.data.data.content;
+            // 分页设置
             const pageStart = this.pageNo * this.pageSize - this.pageSize;
             const pageEnd = this.pageNo * this.pageSize;
             this.totalList = response.data.data.content || [];

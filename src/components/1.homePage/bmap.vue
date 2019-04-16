@@ -13,6 +13,7 @@ export default {
     initMap() {
       this.createMap(); //创建地图
     },
+    // 添加标记
     addMarker(point) {
       var marker = new BMap.Marker(point);
       map.addOverlay(marker);
@@ -28,6 +29,7 @@ export default {
         position: point, // 指定文本标注所在的地理位置
         offset: new BMap.Size(-10, 10) //设置文本偏移量
       };
+      // 添加文本
       var label = new BMap.Label("光谷电气", opts); // 创建文本标注对象
       label.setStyle({
         color: "red",

@@ -9,6 +9,7 @@ export default {
     };
   },
   created() {
+    // 获取环饼图数据
     this.$http.get("homePage/eType").then(response => {
       let ringData = [];
       response.data.data.forEach(item => {
@@ -18,8 +19,8 @@ export default {
       this.drawRing();
     });
   },
-  mounted() {},
   methods: {
+    // 绘制饼图
     drawRing() {
       let drawRing = this.$echarts.init(document.getElementById("drawRing"));
       drawRing.setOption({
@@ -27,12 +28,14 @@ export default {
           trigger: "item",
           formatter: "{b}: {c}"
         },
+        // 标注
         legend: {
           orient: "vertical",
           x: "80%",
           y: "20%",
           data: this.receiveData.name
         },
+        // 分列数据
         series: [
           {
             center: ["40%", "60%"],
@@ -50,6 +53,7 @@ export default {
                 }
               }
             },
+            // 渲染的数据
             data: this.receiveData,
             color: ["#4cca76", "#3ba1e9", "#fa6b67", "#fec048", "#909399"]
           }

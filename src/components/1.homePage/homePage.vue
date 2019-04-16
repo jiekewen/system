@@ -121,7 +121,9 @@ export default {
       console.log("连接关闭");
     }
   },
-  computed: {}
+  computed: {
+    // 计算百分比保留两位小数
+  }
 };
 </script>
 <style lang="less" scoped>

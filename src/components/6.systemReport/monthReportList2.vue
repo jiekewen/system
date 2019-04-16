@@ -1,4 +1,5 @@
 <template>
+  <!-- 月报表 -->
   <div class="monthReportList2">
     <p class="first-box-title" style="background-color:#7cb7d1">月报表</p>
     <div class="box-icon">
@@ -31,6 +32,7 @@
         <!-- 查看弹窗 -->
         <el-dialog class="dialog-table" :title="dialogTitle" :visible.sync="dialogTableVisible">
           <el-table border :data="dialogMonthData">
+            <!-- 弹出的列表 -->
             <el-table-column align="center" property="eidDescription" label="项目名称"></el-table-column>
             <el-table-column align="center" property="ncount" label="接入设备"></el-table-column>
             <el-table-column align="center" property="ecount" label="设备总数"></el-table-column>
@@ -48,7 +50,9 @@
 export default {
   data() {
     return {
+      // 日期选中值
       monthReportDate: "",
+      // 禁选日期不能是今天以及以后的日期
       pickerOptions: {
         disabledDate: time => {
           return time.getTime() > Date.now();
@@ -63,6 +67,7 @@ export default {
     };
   },
   methods: {
+    // 查看
     monthReportView() {
       if (!this.$store.state.handleChangeData) {
         this.$alert("请先选择区域", "您没有选择区域", {
@@ -89,7 +94,7 @@ export default {
 
         let oCount = this.$store.state.facility.oCount;
         let eCount = this.$store.state.facility.eCount;
-        // 发送请求
+        // 请求所需数据
         let monthSendData = {};
         monthSendData.switchhouse = handleValue[0];
         monthSendData.category = handleValue[1];
@@ -98,13 +103,11 @@ export default {
         monthSendData.startDate = gDate5start;
         monthSendData.endDate = gDate5;
         monthSendData.cycle = 5;
-        console.log("monthSendData", monthSendData);
+        //  发送请求
         this.$http
           .post("report/reportByDate", monthSendData)
           .then(response => {
             let resData = response.data.data;
-            console.log("response", response);
-
             let dialogData = {};
             dialogData.eidDescription = resData.eidDescription;
             dialogData.ncount = resData.ncount;
@@ -116,7 +119,7 @@ export default {
             let xx = [];
             xx.push(dialogData);
             console.log("xx", xx);
-
+            // 标题;
             this.dialogMonthData = xx;
             this.dialogTitle =
               gDate5start +
@@ -135,6 +138,7 @@ export default {
           });
       }
     },
+    // 下载
     monthReportDownload() {
       if (!this.$store.state.handleChangeData) {
         this.$alert("请先选择区域", "您没有选择区域", {
@@ -160,7 +164,7 @@ export default {
         const gDate5start = this.monthReportDate + "-01";
         let oCount = this.$store.state.facility.onCount;
         let eCount = this.$store.state.facility.offCount;
-        // 发送请求
+        // 请求所需数据
         let monthSendData = {};
         monthSendData.switchhouse = handleValue[0];
         monthSendData.category = handleValue[1];
@@ -169,7 +173,7 @@ export default {
         monthSendData.startDate = gDate5start;
         monthSendData.endDate = gDate5;
         monthSendData.cycle = 5;
-        console.log("monthSendData", monthSendData);
+        // 发送请求
         this.$http
           .post("report/exportByDate", monthSendData)
           .then(response => {
@@ -177,12 +181,13 @@ export default {
           })
           .catch(err => {
             console.log("err", err);
-            this.$alert("请求失败", "列表获取失败", {
+            this.$alert("请求失败", "下载失败", {
               confirmButtonText: "确定"
             });
           });
       }
     },
+    // 在线打印
     async monthReportPrint() {
       if (!this.$store.state.handleChangeData) {
         this.$alert("请先选择区域", "您没有选择区域", {
@@ -209,7 +214,7 @@ export default {
         const gDate5start = this.monthReportDate + "-01";
         let oCount = this.$store.state.facility.oCount;
         let eCount = this.$store.state.facility.eCount;
-        // 发送请求
+        // 请求所需数据
         let monthSendData = {};
         monthSendData.switchhouse = handleValue[0];
         monthSendData.category = handleValue[1];
@@ -218,6 +223,7 @@ export default {
         monthSendData.startDate = gDate5start;
         monthSendData.endDate = gDate5;
         monthSendData.cycle = 5;
+        // 发送请求
         await this.$http
           .post("report/reportByDate", monthSendData)
           .then(response => {
@@ -231,6 +237,7 @@ export default {
               dialogData.alermCount1 = resData.countResults[0].count;
               dialogData.alerm2 = resData.countResults[1].type;
               dialogData.alermCount2 = resData.countResults[1].count;
+              // 报表标题
               this.$store.state.dayPrintTitle =
                 this.monthReportDate +
                 handleValue[0] +
