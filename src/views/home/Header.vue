@@ -59,7 +59,9 @@ export default {
       this.$http.get("homePage/getOnLineDays").then(res => {
         this.onLineDays = res.data.data;
       });
-  }
+  },
+
+  methods: {}
 };
 </script>
 <style lang="less" scoped>
