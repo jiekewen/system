@@ -1,44 +1,40 @@
 <template>
   <!-- 页面头部 -->
-  <el-row>
-    <el-col :span="8">
-      <div class="Header-box1">
-        <div class="progress-day">安全运行&nbsp;{{onLineDays}}&nbsp;天</div>
-      </div>
-    </el-col>
-    <el-col :span="8">
-      <div class="Header-box2">
-        <h1 class="box2-title">电气安全云平台系统</h1>
-      </div>
-    </el-col>
-    <el-col :span="8">
-      <div class="Header-box3">
-        <div class="box3-warn">
-          <router-link :to="{ path: 'messageList' }">
-            <img src="../../assets/images/home/alerm-count-icon.png" alt>
-          </router-link>
-        </div>
-        <div>
-          <!-- 报警数量 -->
-          <router-link :to="{ path: 'messageList' }">
-            <el-badge :value="alerm.count" class="item-badge"></el-badge>
-          </router-link>
-        </div>
-        <div class="box3-warn">
-          <!-- 用户设置 -->
-          <router-link :to="{ path: 'user' }">
-            <img src="../../assets/images/home/user-icon.png" alt>
-          </router-link>
-        </div>
-        <div class="user-name">
-          <router-link :to="{ path: 'user' }">{{this.$store.state.user}}</router-link>
-        </div>
-        <div class="box3-warn">
-          <img src="../../assets/images/home/set-message-icon.png" alt>
-        </div>
-      </div>
-    </el-col>
-  </el-row>
+  <div class="Header">
+    <!-- 安全运行天数 -->
+    <div class="Header-box1">
+      <div class="progress-day">安全运行&nbsp;{{onLineDays}}&nbsp;天</div>
+    </div>
+    <!-- 主标题 -->
+    <div class="Header-box2">
+      <h1 class="box2-title">电气安全云平台系统</h1>
+    </div>
+    <!-- 个人中心 -->
+    <div class="Header-box3">
+      <img src="../../assets/images/home/alerm-count-icon.png" alt>
+      <router-link :to="{ path: 'messageList' }">
+        <el-badge :value="alerm.count" class="item-badge"></el-badge>
+      </router-link>
+      <img src="../../assets/images/home/user-icon.png" alt>
+      <el-dropdown size="small" placement="bottom-start" trigger="click">
+        <button class="user-name-btn">
+          {{this.$store.state.user}}
+          <i class="el-icon-arrow-down"></i>
+        </button>
+        <el-dropdown-menu style="margin-top:-20px" slot="dropdown">
+          <el-dropdown-item style="border-bottom:1px solid #ccc;">
+            <router-link :to="{ path: 'user' }">个人中心</router-link>
+          </el-dropdown-item>
+          <el-dropdown-item>
+            <router-link :to="{ path: '/' }">退出登录</router-link>
+          </el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <button class="control-btn">
+        <img src="../../assets/images/home/set-message-icon.png" alt>
+      </button>
+    </div>
+  </div>
 </template>
 <script>
 export default {
@@ -66,3 +62,4 @@ export default {
 <style lang="less" scoped>
 @import "../../assets/css/home/Header";
 </style>
+

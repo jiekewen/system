@@ -54,7 +54,7 @@
         </template>
         <el-menu-item class="nav-menu-item" index="/checkCalendar">
           <i class="el-icon-setting"></i>
-          <span slot="title" style="font-size:14px">巡检日历</span>
+          <span slot="title" style="font-size:14px">巡检记录</span>
         </el-menu-item>
         <el-menu-item class="nav-menu-item" index="/checkPlan">
           <i class="el-icon-setting"></i>

@@ -1,5 +1,5 @@
 .sortConfig {
-  margin: 10px;
+  margin: 1%;
 }
 .sortConfig .sortConfig-header {
   display: flex;
@@ -31,7 +31,7 @@
   color: #409eff;
 }
 .sortConfig .sortConfig-wrap {
-  margin-top: 10px;
+  margin-top: 1%;
 }
 .sortConfig .sortConfig-wrap .el-table th {
   color: #555;

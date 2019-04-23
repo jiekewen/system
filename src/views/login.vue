@@ -38,7 +38,7 @@ export default {
     handleLogin() {
       if (this.formData.username !== "admin") {
         this.$alert("请输入正确用户名", "用户名不存在", {
-          confirmButtonText: "确定"
+          confirmButtonText: "确定",
         });
         return false;
       } else if (this.formData.password !== "123456") {

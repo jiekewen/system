@@ -1,5 +1,5 @@
 .systemReport {
-  margin: 10px;
+  margin: 1%;
   min-width: 1200px;
 }
 .systemReport .systemReport-up-half {
@@ -9,14 +9,13 @@
   line-height: 80px;
 }
 .systemReport .systemReport-up-half .up-half-left {
-  width: 50%;
+  width: 70%;
 }
 .systemReport .systemReport-up-half .up-half-left h3 {
   padding-left: 2vw;
 }
 .systemReport .systemReport-up-half .up-half-right {
-  width: 50%;
-  padding-left: 40%;
+  width: 30%;
 }
 .systemReport .systemReport-up-half .up-half-right span {
   font-size: 16px;

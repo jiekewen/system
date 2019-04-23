@@ -1,0 +1,42 @@
+.checkCalendar {
+  margin: 1%;
+}
+.checkCalendar .sortConfig-header {
+  display: flex;
+  padding: 10px;
+  background-color: #fff;
+}
+.checkCalendar .sortConfig-header .header-left {
+  width: 50%;
+}
+.checkCalendar .sortConfig-header .header-left h3 {
+  padding-left: 10px;
+  height: 40px;
+  line-height: 40px;
+}
+.checkCalendar .sortConfig-header .header-right {
+  display: flex;
+  padding-left: 50%;
+  width: 50%;
+}
+.checkCalendar .sortConfig-header .header-right .sortConfig-cascader {
+  margin-right: 10%;
+}
+.checkCalendar .sortConfig-header .header-right .sortConfig-cascader .el-input__inner {
+  border: 1px solid #b5d9ff;
+  border-radius: 4px;
+  background-color: #ecf5ff;
+}
+.checkCalendar .sortConfig-header .header-right .sortConfig-cascader .el-cascader__label {
+  color: #409eff;
+}
+.checkCalendar .sortConfig-wrap {
+  margin-top: 1%;
+}
+.checkCalendar .sortConfig-wrap .el-table th {
+  color: #555;
+}
+.checkCalendar .sortConfig-wrap .wrap-table-page {
+  padding-top: 20px;
+  text-align: center;
+}

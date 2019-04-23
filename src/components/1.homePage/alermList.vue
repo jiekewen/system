@@ -5,27 +5,25 @@
       onMouseOut="this.start()"
       onMouseOver="this.stop()"
       scrollAmount="2"
-      width="400"
       direction="up"
-      style="height:13vh;"
+      winth="400"
+      style="height:13vh;width:40vw"
       align="absmiddle"
     >
-      <p>{{alermList1}}</p>
-      <p>{{alermList2}}</p>
-      <p>{{alermList3}}</p>
-    </marquee>
-    <marquee
-      onMouseOut="this.start()"
-      onMouseOver="this.stop()"
-      scrollAmount="2"
-      width="400"
-      direction="up"
-      style="height:13vh;"
-      align="absmiddle"
-    >
-      <p>{{alermList4}}</p>
-      <p>{{alermList5}}</p>
-      <p>{{alermList6}}</p>
+      <div class="roll-box">
+        <div class="roll-box-left">
+          <p
+            :key="index"
+            v-for="(item,index) in tableData1"
+          >{{item.switchhouse}}&nbsp;{{item.category}}&nbsp;{{item.tds}}&nbsp;{{item.alarmtype}}</p>
+        </div>
+        <div class="roll-box-right">
+          <p
+            :key="index"
+            v-for="(item,index) in tableData2"
+          >{{item.switchhouse}}&nbsp;{{item.category}}&nbsp;{{item.tds}}&nbsp;{{item.alarmtype}}</p>
+        </div>
+      </div>
     </marquee>
   </div>
 </template>
@@ -34,12 +32,9 @@ export default {
   data() {
     return {
       // 报警数据
-      alermList1: "",
-      alermList2: "",
-      alermList3: "",
-      alermList4: "",
-      alermList5: "",
-      alermList6: ""
+      tableData: [],
+      tableData1: [],
+      tableData2: []
     };
   },
   created() {
@@ -47,55 +42,37 @@ export default {
     const count = { amount: 8 };
     this.$http.get("homePage/getAlarmsByLimit", { params: count }).then(res => {
       this.tableData = res.data.data;
-      this.alermList();
+      this.tableData1 = this.tableData.slice(0, 4);
+      this.tableData2 = this.tableData.slice(4, this.tableData.length);
     });
   },
-  methods: {
-    // 报警数据拼接
-    alermList() {
-      this.alermList1 =
-        this.tableData[0].switchhouse +
-        this.tableData[0].tds +
-        this.tableData[0].alarmtype +
-        "警报";
-      this.alermList2 =
-        this.tableData[1].switchhouse +
-        this.tableData[1].tds +
-        this.tableData[1].alarmtype +
-        "警报";
-      this.alermList3 =
-        this.tableData[2].switchhouse +
-        this.tableData[2].tds +
-        this.tableData[2].alarmtype +
-        "警报";
-      this.alermList4 =
-        this.tableData[3].switchhouse +
-        this.tableData[3].tds +
-        this.tableData[3].alarmtype +
-        "警报";
-      this.alermList5 =
-        this.tableData[4].switchhouse +
-        this.tableData[4].tds +
-        this.tableData[4].alarmtype +
-        "警报";
-      this.alermList6 =
-        this.tableData[5].switchhouse +
-        this.tableData[5].tds +
-        this.tableData[5].alarmtype +
-        "警报";
-    }
-  }
+  methods: {}
 };
 </script>
 <style lang="less" scoped>
 .alermList {
-  display: flex;
-  padding: 0 5vw;
-  p {
-    height: 30px;
-    line-height: 30px;
-    font-size: 12px;
-    color: #666;
+  .roll-box {
+    display: flex;
+    .roll-box-left {
+      margin-left: 4vw;
+      p {
+        height: 4vh;
+        line-height: 4vh;
+        font-size: 12px;
+        color: #777;
+        font-family: serif;
+      }
+    }
+    .roll-box-right {
+      margin-left: 4vw;
+      p {
+        height: 4vh;
+        line-height: 4vh;
+        font-size: 12px;
+        color: #777;
+        font-family: serif;
+      }
+    }
   }
 }
 </style>

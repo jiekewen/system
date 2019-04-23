@@ -1,33 +1,36 @@
-.Header-box1 {
-  min-width: 300px;
-  min-height: 80px;
-  padding-left: 20%;
+.Header {
+  display: flex;
+  height: 10vh;
+  line-height: 10vh;
+  width: 100%;
 }
-.Header-box1 .progress-day {
-  color: #888;
+.Header .Header-box1 {
+  width: 30%;
+  padding-left: 5%;
 }
-.Header-box2 {
-  min-height: 80px;
+.Header .Header-box1 .progress-day {
+  color: #777;
+  font-size: 20px;
+}
+.Header .Header-box2 {
+  width: 30%;
   text-align: center;
 }
-.Header-box2 .box2-title {
+.Header .Header-box2 h1 {
   font-size: 24px;
   font-weight: normal;
 }
-.Header-box3 {
-  min-height: 80px;
-  text-align: center;
-  display: flex;
-  padding-left: 50%;
+.Header .Header-box3 {
+  padding-right: 5%;
+  width: 30%;
+  text-align: right;
 }
-.Header-box3 .box3-warn {
-  overflow: hidden;
-  height: 80px;
-  width: 20%;
+.Header .Header-box3 .user-name-btn {
+  font-size: 18px;
+  background-color: #fff;
+  border: none;
 }
-.Header-box3 .box3-warn .item-badge {
-  cursor: pointer;
-}
-.Header-box3 .box3-warn .item-btn {
+.Header .Header-box3 .control-btn {
+  background-color: #fff;
   border: none;
 }

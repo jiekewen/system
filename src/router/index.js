@@ -17,6 +17,10 @@ import SortConfig from '../components/9.sortConfig/sortConfig' //层级设置
 import User from '../components/10.user/user'
 import ReportPrint from '../components/6.systemReport/reportPrint' //打印界面
 
+import AlarmAdd from '../components/3.dangerAlarm/alarmAdd' //报警配置--添加
+import AlarmBatch from '../components/3.dangerAlarm/alarmBatch' //报警配置--批量修改
+import AlarmAmend from '../components/3.dangerAlarm/alarmAmend' //报警配置--单个修改
+
 Vue.use(Router)
 
 export default new Router({
@@ -58,6 +62,23 @@ export default new Router({
           name: '报警配置',
           path: '/alarmConfig',
           component: AlarmConfig,
+        },
+
+        {
+          name: 'alarmAdd',
+          path: '/alarmConfig/alarmAdd',
+          component: AlarmAdd,
+        },
+        {
+          name: 'alarmBatch',
+          path: '/alarmConfig/alarmBatch',
+          // path: '/alarmBatch/:ldl/:flag/:switchhouse',
+          component: AlarmBatch,
+        },
+        {
+          name: 'alarmAmend',
+          path: '/alarmConfig/alarmAmend',
+          component: AlarmAmend,
         },
         {
           name: '数据分析',

@@ -49,7 +49,7 @@ export default {
 </script>
 <style lang="less" scoped>
 #drawMap {
-  height: 66vh;
+  height: 62vh;
   width: 100%;
   font-family: "微软雅黑";
 }

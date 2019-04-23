@@ -7,7 +7,12 @@
       </div>
       <div class="up-half-right">
         <span>选择区域 :</span>
-        <el-cascader placeholder="选择分类" @change="handleChange" :options="cascaderData"></el-cascader>
+        <el-cascader
+          placeholder="选择分类"
+          @change="handleChange"
+          :options="cascaderData"
+          v-model="selectedOptions"
+        ></el-cascader>
       </div>
     </div>
     <!-- 下半部分 -->
@@ -102,7 +107,8 @@ export default {
             }
           ]
         }
-      ]
+      ],
+      selectedOptions: ["", ""]
     };
   },
   components: {
@@ -112,6 +118,9 @@ export default {
     dayReportList2,
     monthReportList2,
     yearReportList2
+  },
+  created() {
+    this.$store.state.handleChangeData = this.selectedOptions;
   },
   methods: {
     // 级联选中

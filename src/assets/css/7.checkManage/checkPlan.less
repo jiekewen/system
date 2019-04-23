@@ -1,1 +1,44 @@
-.checkPlan {}
+.checkPlan {
+  margin: 1%;
+
+  // 头部
+  .checkPlan-header {
+    display: flex;
+    padding: 10px;
+    background-color: #fff;
+
+    // 头部左侧
+    .header-left {
+      width: 50%;
+
+      h3 {
+        padding-left: 10px;
+        height: 40px;
+        line-height: 40px;
+      }
+    }
+
+    // 头部右侧
+    .header-right {
+      display: flex;
+      padding-left: 80%;
+      width: 50%;
+    }
+  }
+
+  // 列表
+  .checkPlan-wrap {
+    margin-top: 1%;
+
+    .el-table {
+      th {
+        color: #555;
+      }
+    }
+
+    .wrap-table-page {
+      padding-top: 20px;
+      text-align: center;
+    }
+  }
+}

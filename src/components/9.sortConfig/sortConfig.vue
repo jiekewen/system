@@ -6,12 +6,7 @@
         <h3>层级配置列表</h3>
       </div>
       <div class="header-right">
-        <el-cascader
-          @change="handleChange"
-          class="sortConfig-cascader"
-          :options="cascaderData"
-          change-on-select
-        ></el-cascader>
+        <el-cascader @change="handleChange" class="sortConfig-cascader" :options="cascaderData"></el-cascader>
         <el-button @click="handleEdit" type="primary" plain>保存修改</el-button>
       </div>
     </div>
@@ -148,12 +143,15 @@ export default {
       loading: false,
       pageTotal: 0, //分页总数
       pageNo: 1, //当前页
-      pageSize: 10, //每页显示数目
-      pageList: [], //动态生成的每页展示的渲染数组
-      totalList: [] //数据的总条数
+      pageSize: 10 //每页显示数目
     };
   },
   created() {
+    // 获取列表总数
+    this.$http.get("set/equipmentCount").then(response => {
+      this.pageTotal = response.data.data;
+      console.log("response", response);
+    });
     // 列表数据
     this.getTableList();
   },
@@ -161,18 +159,10 @@ export default {
     async getTableList() {
       //  发送请求
       await this.$http
-        .get(`set/equipmentListByEid?page=${this.pageNo}&size=${2}`)
+        .get(`set/equipmentListByEid?pageNum=${this.pageNo}&pageSize=${10}`)
         .then(response => {
           if (response.data.code == 0) {
-            // 分页设置
-            const pageStart = this.pageNo * this.pageSize - this.pageSize;
-            const pageEnd = this.pageNo * this.pageSize;
-            this.totalList = response.data.data.content || [];
-            this.pageTotal = this.totalList.length;
-            const tempArr = copyArray(this.totalList);
-            this.pageList = tempArr.slice(pageStart, pageEnd);
-
-            this.tableData = this.pageList;
+            this.tableData = response.data.data;
           } else {
             this.$alert("获取列表失败", {
               confirmButtonText: "确定"
@@ -188,6 +178,8 @@ export default {
 
     // 级联选择器change事件
     handleChange(value) {
+      console.log("value", value);
+
       //把分类赋值checkedSelect
       this.checkedSelect = value;
     },

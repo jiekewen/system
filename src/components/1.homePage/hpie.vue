@@ -38,9 +38,9 @@ export default {
         // 分列数据
         series: [
           {
-            center: ["40%", "60%"],
+            center: ["40%", "50%"],
             type: "pie",
-            radius: ["40%", "70%"],
+            radius: ["30%", "60%"],
             label: {
               normal: {
                 formatter: "{b|{b}:} {per|  {d}%}",
@@ -66,6 +66,6 @@ export default {
 <style lang="less" scoped>
 #drawRing {
   width: 100%;
-  height: 30vh;
+  height: 35vh;
 }
 </style>

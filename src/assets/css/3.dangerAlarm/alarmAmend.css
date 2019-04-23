@@ -1,0 +1,65 @@
+/* 报警配置--单个修改 */
+
+
+/* 标题 */
+
+.add-alarm {
+    width: 100%;
+    color: #5f5f5f;
+    text-align: center;
+    font-size: 24px;
+    line-height: 66px;
+}
+
+
+/* 内容区 */
+
+.alerm_form {
+    width: 98%;
+    height: 100%;
+    margin: 0 auto;
+    background: #ffffff;
+}
+
+
+/* --配电室、限制量、Tag */
+
+.alarmAmend .alerm_form .demo-ruleForm .alerm_box .alermTie1 {
+    display: inline-block;
+    height: 23px;
+    line-height: 18px;
+    padding-top: 30px;
+    padding-left: 30px;
+    font-size: 14px;
+}
+
+.alarmAmend .alerm_form .demo-ruleForm .alerm_box .alerm_radio,
+.alerm_select,
+.alerm_table {
+    margin-top: -27px;
+    margin-left: 94px;
+}
+
+
+/* 高限 */
+
+.alarmAmend .alerm_form .demo-ruleForm .alerm_higlow {
+    margin-top: 30px;
+    margin-left: -72px;
+}
+
+.alarmAmend .alerm_form .demo-ruleForm .alerm_higlow .el-input {
+    width: 17%;
+}
+
+.alarmAmend .alerm_form .demo-ruleForm .alerm_box .alerm-table .el-table .cell label {
+    width: 30px;
+    border: 0px;
+}
+
+
+/* table鼠标悬浮 */
+
+.el-table--enable-row-hover .el-table__body tr:hover>td {
+    color: #2a84f6;
+}

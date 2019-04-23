@@ -1,20 +1,27 @@
+.Header {
+  display: flex;
+  height: 10vh;
+  line-height: 10vh;
+  width: 100%;
+
   // 时间部分
   .Header-box1 {
-    min-width: 300px;
-    min-height: 80px;
-    padding-left: 20%;
+    width: 30%;
+    padding-left: 5%;
 
+    // 安全运行天数
     .progress-day {
-      color: #888
+      color: #777;
+      font-size: 20px;
     }
   }
 
   // 标题部分
   .Header-box2 {
-    min-height: 80px;
+    width: 30%;
     text-align: center;
 
-    .box2-title {
+    h1 {
       font-size: 24px;
       font-weight: normal;
     }
@@ -22,25 +29,21 @@
 
   // 右侧部分
   .Header-box3 {
-    min-height: 80px;
-    text-align: center;
-    display: flex;
-    padding-left: 50%;
+    padding-right: 5%;
+    width: 30%;
+    text-align: right; // 用户按钮
 
-    .user-name {}
+    .user-name-btn {
+      font-size: 18px;
+      background-color: #fff;
+      border: none;
+    }
 
-    .box3-warn {
-      overflow: hidden;
-      height: 80px;
-      width: 20%;
-
-      // 报警数量悬停小手
-      .item-badge {
-        cursor: pointer;
-      }
-
-      .item-btn {
-        border: none
-      }
+    // 控制按钮
+    .control-btn {
+      background-color: #fff;
+      border: none;
     }
   }
+
+}

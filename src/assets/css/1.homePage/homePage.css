@@ -1,8 +1,6 @@
 .homePage {
+  width: 100%;
   display: flex;
-  margin: 1%;
-  padding: 0 1%;
-  margin-bottom: 0;
 }
 .homePage .icon-box {
   padding-top: 5%;
@@ -17,64 +15,74 @@
   color: #fff;
 }
 .homePage .homePage-leftHalf {
-  width: 50%;
-  margin-right: 2.5%;
+  width: 48.5%;
+  margin-left: 1%;
+  margin-top: 2vh;
 }
 .homePage .homePage-leftHalf .leftHalf-top {
   width: 100%;
   display: flex;
 }
 .homePage .homePage-leftHalf .leftHalf-top .leftHalf-top-first {
-  width: 50%;
-  height: 180px;
-  margin-right: 5%;
+  width: 49%;
+  margin-right: 2%;
+  height: 22vh;
   background: #67BCDF url("../../images/homePage/on_line_bg.png") no-repeat center;
 }
 .homePage .homePage-leftHalf .leftHalf-top .leftHalf-top-second {
-  width: 50%;
-  height: 180px;
+  width: 49%;
+  height: 22vh;
   background: #61C3BB url("../../images/homePage/miss_bg.png") no-repeat center;
 }
 .homePage .homePage-leftHalf .leftHalf-map {
-  padding-top: 5%;
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  height: 62vh;
+  background-color: pink;
 }
 .homePage .homePage-rightHalf {
-  width: 50%;
+  width: 48.5%;
+  margin-left: 1%;
+  margin-right: 1%;
 }
 .homePage .homePage-rightHalf .rightHalf-top {
   width: 100%;
   display: flex;
+  margin-top: 2vh;
 }
 .homePage .homePage-rightHalf .rightHalf-top .rightHalf-top-first {
-  width: 50%;
-  height: 180px;
-  margin-right: 5%;
+  width: 49%;
+  height: 22vh;
+  margin-right: 2%;
   background: #E67D6F url("../../images/homePage/on_line_count.png") no-repeat center;
 }
 .homePage .homePage-rightHalf .rightHalf-top .rightHalf-top-second {
-  width: 50%;
-  height: 180px;
+  width: 49%;
+  height: 22vh;
   background: #E7A63F url("../../images/homePage/progress_bg.png") no-repeat center;
 }
 .homePage .homePage-rightHalf .rightHalf-ring {
-  padding-top: 1vh;
-  padding-left: 2vh;
-  margin-top: 5%;
-  height: 38vh;
+  margin-top: 2vh;
+  height: 40vh;
   background-color: #fff;
 }
 .homePage .homePage-rightHalf .rightHalf-ring p {
+  padding-left: 2vw;
+  height: 5vh;
+  line-height: 5vh;
   color: #666;
   font-size: 16px;
 }
 .homePage .homePage-rightHalf .rightHalf-alarm {
-  margin-top: 4vh;
-  padding: 1vh 2vw;
+  margin-top: 2vh;
   height: 20vh;
+  margin-bottom: 2vh;
   background-color: #fff;
 }
 .homePage .homePage-rightHalf .rightHalf-alarm p {
-  padding-bottom: 2vh;
+  height: 5vh;
+  padding-left: 2vw;
+  line-height: 5vh;
   color: #666;
   font-size: 16px;
 }
