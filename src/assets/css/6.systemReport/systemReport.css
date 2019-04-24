@@ -1,42 +1,47 @@
 .systemReport {
-  margin: 1%;
-  min-width: 1200px;
+  padding-left: 1%;
+  padding-right: 1%;
+  width: 98%;
 }
 .systemReport .systemReport-up-half {
+  margin-top: 2vh;
   display: flex;
   background-color: #fff;
-  height: 80px;
-  line-height: 80px;
+  height: 8vh;
+  line-height: 8vh;
+  min-height: 60px;
 }
 .systemReport .systemReport-up-half .up-half-left {
-  width: 70%;
-}
-.systemReport .systemReport-up-half .up-half-left h3 {
-  padding-left: 2vw;
+  padding-left: 2%;
+  width: 68%;
 }
 .systemReport .systemReport-up-half .up-half-right {
   width: 30%;
+  min-width: 400px;
 }
 .systemReport .systemReport-up-half .up-half-right span {
   font-size: 16px;
-  margin-right: 2%;
-  margin-right: 5%;
+  margin-left: 10%;
 }
 .systemReport .systemReport-down-half {
-  padding-left: 5%;
+  width: 94%;
+  padding: 0 3%;
   text-align: center;
 }
 .systemReport .systemReport-down-half .down-half-box {
-  padding-top: 4%;
+  padding-top: 5vh;
   display: flex;
 }
 .systemReport .systemReport-down-half .down-half-box .half-box1 {
-  width: 29%;
+  width: 30%;
+  min-width: 350px;
 }
 .systemReport .systemReport-down-half .down-half-box .half-box2 {
-  width: 29%;
-  margin: 0 4%;
+  width: 30%;
+  margin: 0 5%;
+  min-width: 350px;
 }
 .systemReport .systemReport-down-half .down-half-box .half-box3 {
-  width: 29%;
+  width: 30%;
+  min-width: 350px;
 }

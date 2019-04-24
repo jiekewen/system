@@ -18,8 +18,8 @@
         element-loading-spinner="el-icon-loading"
         element-loading-background="#EBEEF5"
         :data="tableData"
-        style="width: 100%"
         size="mini"
+        style="width:100%"
         empty-text="数据为空"
         @selection-change="selects"
       >

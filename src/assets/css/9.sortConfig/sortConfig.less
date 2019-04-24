@@ -1,28 +1,30 @@
 .sortConfig {
-  margin: 1%;
+  width: 98%;
+  padding-left: 1%;
+  padding-right: 1%;
 
   // 头部
   .sortConfig-header {
+    margin-top: 2vh;
     display: flex;
-    padding: 10px;
+    width: 100%;
+    height: 8vh;
+    line-height: 8vh;
     background-color: #fff;
-
+    min-height: 60px;
     // 头部左侧
-    .header-left {
-      width: 50%;
 
-      h3 {
-        padding-left: 10px;
-        height: 40px;
-        line-height: 40px;
-      }
+    .header-left {
+      padding-left: 2%;
+      width: 48%;
+
     }
 
     // 头部右侧
     .header-right {
-      display: flex;
-      padding-left: 50%;
-      width: 50%;
+      padding-left: 20%;
+      width: 30%;
+      min-width: 400px;
 
 
       // 级联选择
@@ -45,7 +47,8 @@
 
   // 列表
   .sortConfig-wrap {
-    margin-top: 1%;
+    margin-top: 2vh;
+    height: 73vh;
 
     .el-table {
       th {
@@ -54,7 +57,7 @@
     }
 
     .wra-page {
-      padding-top: 20px;
+      margin-top: 5vh;
       text-align: center;
     }
   }

@@ -44,4 +44,5 @@ body .home .main .header {
   height: 10vh;
   line-height: 10vh;
   background-color: #fff;
+  min-height: 60px;
 }
