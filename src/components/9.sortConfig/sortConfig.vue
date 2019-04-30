@@ -28,7 +28,7 @@
         <el-table-column align="center" prop="bnm" label="通讯管理机"></el-table-column>
         <el-table-column align="center" prop="enm" label="名称"></el-table-column>
         <el-table-column align="center" prop="eds" label="描述"></el-table-column>
-        <!-- 筛选功能 -->
+        <!-- 一级筛选 -->
         <el-table-column
           align="center"
           prop="switchhouse"
@@ -37,14 +37,14 @@
           :filter-method="filterTag1"
           filter-placement="bottom-end"
         >
-          <!-- 筛选功能 -->
           <template slot-scope="scope">
             <el-tag
-              :type="scope.row.switchhouse === '新工厂配电室' ? 'warning' : 'success'"
+              :type="scope.row.switchhouse === '新工厂配电室' ? 'warning' : 'warning'"
               disable-transitions
             >{{scope.row.switchhouse}}</el-tag>
           </template>
         </el-table-column>
+        <!-- 二级筛选 -->
         <el-table-column
           :filters="[{ text: '工厂用电', value: '工厂用电' }, { text: '照明用电', value: '照明用电' },{ text: '其他', value: '其他' }]"
           :filter-method="filterTag2"
@@ -55,7 +55,7 @@
         >
           <template slot-scope="scope">
             <el-tag
-              :type="scope.row.category === '工厂用电' ? 'warning' : 'success'"
+              :type="scope.row.category === '工厂用电' ? 'success' : 'success'"
               disable-transitions
             >{{scope.row.category}}</el-tag>
           </template>
@@ -75,11 +75,13 @@
   </div>
 </template>
 <script>
+// 复制方法引入
 import { copyArray } from "./copyArray";
 export default {
   name: "sortConfig",
   data() {
     return {
+      // 层级选项
       cascaderData: [
         {
           value: "新工厂配电室",

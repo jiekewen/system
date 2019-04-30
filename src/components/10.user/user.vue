@@ -3,6 +3,7 @@
     <div class="form-submit1">
       <h4 class="submit1-h4">个人中心</h4>
       <div class="form-submit2">
+        <!-- 提交表单 -->
         <el-form
           :model="ruleForm2"
           status-icon

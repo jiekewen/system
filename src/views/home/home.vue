@@ -3,6 +3,7 @@
     <!-- 导航 -->
     <div class="nav">
       <div class="navLogo">
+        <!-- 导航上logo -->
         <img src="../../assets/images/home/u8.png" alt>
       </div>
       <div class="navWrap">
@@ -20,7 +21,9 @@
   </div>
 </template>
 <script>
+// 头部
 import Header from "./Header";
+// 导航
 import Menu from "./Menu";
 export default {
   data() {

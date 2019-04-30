@@ -1,31 +1,35 @@
 .checkPlan {
-  margin: 1%;
+  width: 98%;
+  padding-left: 1%;
+  padding-right: 1%;
 }
 .checkPlan .checkPlan-header {
+  margin-top: 2vh;
   display: flex;
-  padding: 10px;
+  width: 100%;
+  height: 8vh;
+  line-height: 8vh;
   background-color: #fff;
+  min-height: 60px;
 }
 .checkPlan .checkPlan-header .header-left {
-  width: 50%;
-}
-.checkPlan .checkPlan-header .header-left h3 {
-  padding-left: 10px;
-  height: 40px;
-  line-height: 40px;
+  padding-left: 2%;
+  width: 48%;
 }
 .checkPlan .checkPlan-header .header-right {
-  display: flex;
-  padding-left: 80%;
-  width: 50%;
+  text-align: right;
+  width: 48%;
+  padding-right: 2%;
 }
 .checkPlan .checkPlan-wrap {
-  margin-top: 1%;
+  margin-top: 2vh;
+  height: 73vh;
 }
-.checkPlan .checkPlan-wrap .el-table th {
-  color: #555;
+.checkPlan .checkPlan-wrap .checkPlan-dialog {
+  background: rgba(128, 128, 128, 0.2);
+  padding-left: 60%;
 }
 .checkPlan .checkPlan-wrap .wrap-table-page {
-  padding-top: 20px;
-  text-align: center;
+  margin-top: 5vh;
+  text-align: center !important;
 }

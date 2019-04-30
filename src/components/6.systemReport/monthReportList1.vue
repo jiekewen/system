@@ -95,14 +95,9 @@ export default {
     };
   },
   methods: {
-    // 查看
-    monthReportRingView() {
-      if (!this.$store.state.handleChangeData) {
-        this.$alert("请先选择区域", "您没有选择区域", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.monthReport.startDate) {
+    // 跳转判断
+    judge() {
+      if (!this.monthReport.startDate) {
         this.$alert("请先选择起始日期", "您没有选择起始日期", {
           confirmButtonText: "确定"
         });
@@ -111,6 +106,14 @@ export default {
         this.$alert("请先选择结束日期", "您没有选择结束日期", {
           confirmButtonText: "确定"
         });
+        return false;
+      } else {
+        return true;
+      }
+    },
+    // 查看
+    monthReportRingView() {
+      if (!this.judge()) {
         return false;
       } else {
         const handleValue = this.$store.state.handleChangeData;
@@ -135,7 +138,6 @@ export default {
         monthSendData.startDate = this.monthReport.startDate;
         monthSendData.endDate = gDate5;
         monthSendData.cycle = 2;
-        console.log("monthSendData", monthSendData);
         // 发送数据
         this.$http
           .post("report/reportByDate", monthSendData)
@@ -161,7 +163,6 @@ export default {
               handleValue[1] +
               " 月累积量报表";
             this.dialogTableVisible = true;
-            console.log("this.dialogDayData", this.dialogDayData);
           })
           .catch(err => {
             console.log("err", err);
@@ -173,20 +174,7 @@ export default {
     },
     // 在线打印
     monthReportRingDownload() {
-      if (!this.$store.state.handleChangeData) {
-        this.$alert("请先选择区域", "您没有选择区域", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.monthReport.startDate) {
-        this.$alert("请先选择起始日期", "您没有选择起始日期", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.monthReport.endDate) {
-        this.$alert("请先选择结束日期", "您没有选择结束日期", {
-          confirmButtonText: "确定"
-        });
+      if (!this.judge()) {
         return false;
       } else {
         const handleValue = this.$store.state.handleChangeData;
@@ -210,7 +198,6 @@ export default {
         monthSendData.startDate = this.monthReport.startDate;
         monthSendData.endDate = gDate5;
         monthSendData.cycle = 2;
-        console.log("monthSendData", monthSendData);
         // 发送请求
         this.$http
           .post("report/exportByDate", monthSendData)
@@ -226,20 +213,7 @@ export default {
       }
     },
     async monthReportRingPrint() {
-      if (!this.$store.state.handleChangeData) {
-        this.$alert("请先选择区域", "您没有选择区域", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.monthReport.startDate) {
-        this.$alert("请先选择起始日期", "您没有选择起始日期", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.monthReport.endDate) {
-        this.$alert("请先选择结束日期", "您没有选择结束日期", {
-          confirmButtonText: "确定"
-        });
+      if (!this.judge()) {
         return false;
       } else {
         const handleValue = this.$store.state.handleChangeData;

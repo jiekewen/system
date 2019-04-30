@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '../views/login'
-import Home from '../views/home/home'
+import Login from '../views/login' //登陆  
+import Home from '../views/home/home' //主组件
 // 引入nav组件
 import HomePage from '../components/1.homePage/homePage' //首页
 import DataMonitor from '../components/2.dataMonitor/dataMonitor' //数据监控
@@ -12,11 +12,12 @@ import SystemLog from '../components/5.systemLog/systemLog' //系统日志
 import SystemReport from '../components/6.systemReport/systemReport' //系统报表
 import CheckCalendar from '../components/7.checkManage/checkCalendar' //巡检日历
 import CheckPlan from '../components/7.checkManage/checkPlan' //巡检计划
+import AddNewPlan from '../components/7.checkManage/addNewPlan' //巡检计划--新增巡检计划
 import Knowledge from '../components/8.knowledge/knowledge' //知识库
 import SortConfig from '../components/9.sortConfig/sortConfig' //层级设置
-import User from '../components/10.user/user'
+import User from '../components/10.user/user' //个人中心
 import ReportPrint from '../components/6.systemReport/reportPrint' //打印界面
-
+// 次级界面
 import AlarmAdd from '../components/3.dangerAlarm/alarmAdd' //报警配置--添加
 import AlarmBatch from '../components/3.dangerAlarm/alarmBatch' //报警配置--批量修改
 import AlarmAmend from '../components/3.dangerAlarm/alarmAmend' //报警配置--单个修改
@@ -24,12 +25,13 @@ import AlarmAmend from '../components/3.dangerAlarm/alarmAmend' //报警配置--
 Vue.use(Router)
 
 export default new Router({
-  //mode: "history", //去掉#
+  // mode: "history", //去掉#
   routes: [{
       name: 'login',
       path: '/',
       component: Login,
     },
+    // 报表打印界面
     {
       name: 'reportPrint',
       path: '/reportPrint',
@@ -63,7 +65,6 @@ export default new Router({
           path: '/alarmConfig',
           component: AlarmConfig,
         },
-
         {
           name: 'alarmAdd',
           path: '/alarmConfig/alarmAdd',
@@ -72,7 +73,6 @@ export default new Router({
         {
           name: 'alarmBatch',
           path: '/alarmConfig/alarmBatch',
-          // path: '/alarmBatch/:ldl/:flag/:switchhouse',
           component: AlarmBatch,
         },
         {
@@ -106,13 +106,19 @@ export default new Router({
           path: '/checkPlan',
           component: CheckPlan,
         },
+        // 新增巡检计划
+        {
+          name: 'addNewPlan',
+          path: '/checkPlan/addNewPlan',
+          component: AddNewPlan,
+        },
         {
           name: '知识库',
           path: '/knowledge',
           component: Knowledge,
         },
         {
-          name: '层级设置',
+          name: '分类设置',
           path: '/sortConfig',
           component: SortConfig,
         },

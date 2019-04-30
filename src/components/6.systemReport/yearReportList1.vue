@@ -95,14 +95,9 @@ export default {
     };
   },
   methods: {
-    // 查看
-    yearReportRingView() {
-      if (!this.$store.state.handleChangeData) {
-        this.$alert("请先选择区域", "您没有选择区域", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.yearReport.startDate) {
+    // 跳转判断
+    judge() {
+      if (!this.yearReport.startDate) {
         this.$alert("请先选择起始日期", "您没有选择起始日期", {
           confirmButtonText: "确定"
         });
@@ -111,6 +106,14 @@ export default {
         this.$alert("请先选择结束日期", "您没有选择结束日期", {
           confirmButtonText: "确定"
         });
+        return false;
+      } else {
+        return true;
+      }
+    },
+    // 查看
+    yearReportRingView() {
+      if (!this.judge()) {
         return false;
       } else {
         const handleValue = this.$store.state.handleChangeData;
@@ -162,20 +165,7 @@ export default {
     },
     // 下载
     yearReportRingDownload() {
-      if (!this.$store.state.handleChangeData) {
-        this.$alert("请先选择区域", "您没有选择区域", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.yearReport.startDate) {
-        this.$alert("请先选择起始日期", "您没有选择起始日期", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.yearReport.endDate) {
-        this.$alert("请先选择结束日期", "您没有选择结束日期", {
-          confirmButtonText: "确定"
-        });
+      if (!this.judge()) {
         return false;
       } else {
         const handleValue = this.$store.state.handleChangeData;
@@ -207,20 +197,7 @@ export default {
     },
     // 在线打印
     async yearReportRingPrint() {
-      if (!this.$store.state.handleChangeData) {
-        this.$alert("请先选择区域", "您没有选择区域", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.yearReport.startDate) {
-        this.$alert("请先选择起始日期", "您没有选择起始日期", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.yearReport.endDate) {
-        this.$alert("请先选择结束日期", "您没有选择结束日期", {
-          confirmButtonText: "确定"
-        });
+      if (!this.judge()) {
         return false;
       } else {
         const handleValue = this.$store.state.handleChangeData;

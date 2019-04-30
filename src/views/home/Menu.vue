@@ -88,10 +88,11 @@ export default {
 <style>
 /* 选中状态字体的颜色 */
 .NavMenu .el-menu-item.is-active {
-  background-color: rgb(11, 101, 211) !important;
+  background-color: #1a1e24 !important;
   color: #fff;
+  border-right: 3px solid #689df9 !important;
 }
-
+/* 导航字体 */
 .NavMenu .NavMenu-box .el-submenu__title {
   font-size: 16px;
 }

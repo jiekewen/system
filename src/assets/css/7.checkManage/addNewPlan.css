@@ -1,0 +1,35 @@
+.addNewPlan {
+  width: 98%;
+  padding-left: 1%;
+  padding-right: 1%;
+}
+.addNewPlan .newPlan-title {
+  margin-top: 2vh;
+  height: 8vh;
+  line-height: 8vh;
+  background-color: #fff;
+  min-height: 60px;
+  padding-left: 2%;
+  width: 98%;
+  border-bottom: 1px solid #000;
+}
+.addNewPlan .newPlan-wrap {
+  background-color: #fff;
+  height: 77vh;
+}
+.addNewPlan .newPlan-wrap .newPlan-form {
+  padding-top: 3vh;
+  padding-left: 3%;
+  width: 26%;
+}
+.addNewPlan .newPlan-wrap .newPlan-btn {
+  display: flex;
+}
+.addNewPlan .newPlan-wrap .newPlan-btn .btn-left {
+  margin-left: 2vw;
+  width: 6vw;
+}
+.addNewPlan .newPlan-wrap .newPlan-btn .btn-right {
+  width: 6vw;
+  margin-left: 5vw;
+}

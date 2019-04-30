@@ -1,61 +1,29 @@
 .checkCalendar {
-  margin: 1%;
+  width: 98%;
+  padding-left: 1%;
+  padding-right: 1%;
 
-  // 头部
-  .sortConfig-header {
+  // 巡检记录标题
+  .calendar-header {
+    margin-top: 2vh;
     display: flex;
-    padding: 10px;
+    width: 98%;
+    height: 8vh;
+    line-height: 8vh;
     background-color: #fff;
-
-    // 头部左侧
-    .header-left {
-      width: 50%;
-
-      h3 {
-        padding-left: 10px;
-        height: 40px;
-        line-height: 40px;
-      }
-    }
-
-    // 头部右侧
-    .header-right {
-      display: flex;
-      padding-left: 50%;
-      width: 50%;
-
-
-      // 级联选择
-      .sortConfig-cascader {
-        margin-right: 10%;
-
-        // 级联框内
-        .el-input__inner {
-          border: 1px solid #b5d9ff;
-          border-radius: 4px;
-          background-color: #ecf5ff;
-        }
-
-        .el-cascader__label {
-          color: #409eff;
-        }
-      }
-    }
+    min-height: 60px;
+    padding-left: 2%;
   }
 
   // 列表
-  .sortConfig-wrap {
-    margin-top: 1%;
-
-    .el-table {
-      th {
-        color: #555;
-      }
-    }
+  .checkCalendar-wrap {
+    margin-top: 2vh;
+    height: 73vh;
 
     .wrap-table-page {
-      padding-top: 20px;
+      margin-top: 5vh;
       text-align: center;
     }
   }
+
 }

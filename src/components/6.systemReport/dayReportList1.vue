@@ -50,10 +50,10 @@
             <el-table-column align="center" property="eidDescription" label="项目名称"></el-table-column>
             <el-table-column align="center" property="ncount" label="接入设备"></el-table-column>
             <el-table-column align="center" property="ecount" label="设备总数"></el-table-column>
-            <el-table-column align="center" property="alerm1" label="报警类型1"></el-table-column>
-            <el-table-column align="center" property="alermCount1" label="报警次数1"></el-table-column>
-            <el-table-column align="center" property="alerm2" label="报警类型2"></el-table-column>
-            <el-table-column align="center" property="alermCount2" label="报警次数2"></el-table-column>
+            <el-table-column align="center" property="alerm1" label="报警类型(1)"></el-table-column>
+            <el-table-column align="center" property="alermCount1" label="报警次数(1)"></el-table-column>
+            <el-table-column align="center" property="alerm2" label="报警类型(2)"></el-table-column>
+            <el-table-column align="center" property="alermCount2" label="报警次数(2)"></el-table-column>
           </el-table>
         </el-dialog>
       </div>
@@ -98,14 +98,9 @@ export default {
     };
   },
   methods: {
-    // 查看
-    dayReportRingView() {
-      if (!this.$store.state.handleChangeData) {
-        this.$alert("请先选择区域", "您没有选择区域", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.dayReport.startDate) {
+    // 做跳转判断
+    judge() {
+      if (!this.dayReport.startDate) {
         this.$alert("请先选择起始日期", "您没有选择起始日期", {
           confirmButtonText: "确定"
         });
@@ -116,10 +111,17 @@ export default {
         });
         return false;
       } else {
+        return true;
+      }
+    },
+    // 查看
+    dayReportRingView() {
+      if (!this.judge()) {
+        return false;
+      } else {
         const handleValue = this.$store.state.handleChangeData;
         let oCount = this.$store.state.facility.oCount;
         let eCount = this.$store.state.facility.eCount;
-
         // 需要的发送数据
         let daySendData = {};
         daySendData.switchhouse = handleValue[0];
@@ -129,7 +131,6 @@ export default {
         daySendData.startDate = this.dayReport.startDate;
         daySendData.endDate = this.dayReport.endDate;
         daySendData.cycle = 1;
-        console.log("daySendData", daySendData);
         // 发送请求
         this.$http
           .post("report/reportByDate", daySendData)
@@ -146,7 +147,6 @@ export default {
             console.log("dialogData", dialogData);
             let xx = [];
             xx.push(dialogData);
-            console.log("xx", xx);
             this.dialogDayData = xx;
             this.dialogTitle =
               this.dayReport.startDate +
@@ -156,10 +156,8 @@ export default {
               handleValue[1] +
               " 日累积量报表";
             this.dialogTableVisible = true;
-            console.log("this.dialogDayData", this.dialogDayData);
           })
           .catch(err => {
-            console.log("err", err);
             this.$alert("请求失败", "列表获取失败", {
               confirmButtonText: "确定"
             });
@@ -168,20 +166,8 @@ export default {
     },
     // 下载
     dayReportRingDownload() {
-      if (!this.$store.state.handleChangeData) {
-        this.$alert("请先选择区域", "您没有选择区域", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.dayReport.startDate) {
-        this.$alert("请先选择起始日期", "您没有选择起始日期", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.dayReport.endDate) {
-        this.$alert("请先选择结束日期", "您没有选择结束日期", {
-          confirmButtonText: "确定"
-        });
+      // 判断
+      if (!this.judge()) {
         return false;
       } else {
         const handleValue = this.$store.state.handleChangeData;
@@ -211,22 +197,10 @@ export default {
           });
       }
     },
+
     // 在线打印
     async dayReportRingPrint() {
-      if (!this.$store.state.handleChangeData) {
-        this.$alert("请先选择区域", "您没有选择区域", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.dayReport.startDate) {
-        this.$alert("请先选择起始日期", "您没有选择起始日期", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.dayReport.endDate) {
-        this.$alert("请先选择结束日期", "您没有选择结束日期", {
-          confirmButtonText: "确定"
-        });
+      if (!this.judge()) {
         return false;
       } else {
         const handleValue = this.$store.state.handleChangeData;

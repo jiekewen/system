@@ -67,17 +67,18 @@ export default {
     };
   },
   methods: {
-    // 查看
-    monthReportView() {
-      if (!this.$store.state.handleChangeData) {
-        this.$alert("请先选择区域", "您没有选择区域", {
+    // 跳转判断
+    judge() {
+      if (!this.monthReportDate) {
+        this.$alert("请先选择日期", "您没有选择日期", {
           confirmButtonText: "确定"
         });
         return false;
-      } else if (!this.monthReportDate) {
-        this.$alert("请先选择结束日期", "您没有选择结束日期", {
-          confirmButtonText: "确定"
-        });
+      }
+    },
+    // 查看
+    monthReportView() {
+      if (!this.judge()) {
         return false;
       } else {
         const handleValue = this.$store.state.handleChangeData;
@@ -118,7 +119,7 @@ export default {
             dialogData.alermCount2 = resData.countResults[1].count;
             let xx = [];
             xx.push(dialogData);
-            console.log("xx", xx);
+
             // 标题;
             this.dialogMonthData = xx;
             this.dialogTitle =
@@ -140,15 +141,7 @@ export default {
     },
     // 下载
     monthReportDownload() {
-      if (!this.$store.state.handleChangeData) {
-        this.$alert("请先选择区域", "您没有选择区域", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.monthReportDate) {
-        this.$alert("请先选择结束日期", "您没有选择结束日期", {
-          confirmButtonText: "确定"
-        });
+      if (!this.judge()) {
         return false;
       } else {
         const handleValue = this.$store.state.handleChangeData;
@@ -189,15 +182,7 @@ export default {
     },
     // 在线打印
     async monthReportPrint() {
-      if (!this.$store.state.handleChangeData) {
-        this.$alert("请先选择区域", "您没有选择区域", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.monthReportDate) {
-        this.$alert("请先选择结束日期", "您没有选择结束日期", {
-          confirmButtonText: "确定"
-        });
+      if (!this.judge()) {
         return false;
       } else {
         const handleValue = this.$store.state.handleChangeData;

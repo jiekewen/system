@@ -69,17 +69,20 @@ export default {
     };
   },
   methods: {
-    // 查看
-    yearReportView() {
-      if (!this.$store.state.handleChangeData) {
-        this.$alert("请先选择区域", "您没有选择区域", {
+    // 跳转判断
+    judge() {
+      if (!this.yearReportDate) {
+        this.$alert("请先选择日期", "您没有选择日期", {
           confirmButtonText: "确定"
         });
         return false;
-      } else if (!this.yearReportDate) {
-        this.$alert("请先选择结束日期", "您没有选择结束日期", {
-          confirmButtonText: "确定"
-        });
+      } else {
+        return true;
+      }
+    },
+    // 查看
+    yearReportView() {
+      if (!this.judge()) {
         return false;
       } else {
         const handleValue = this.$store.state.handleChangeData;
@@ -132,15 +135,7 @@ export default {
     },
     // 下载
     yearReportDownload() {
-      if (!this.$store.state.handleChangeData) {
-        this.$alert("请先选择区域", "您没有选择区域", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.yearReportDate) {
-        this.$alert("请先选择结束日期", "您没有选择结束日期", {
-          confirmButtonText: "确定"
-        });
+      if (!this.judge()) {
         return false;
       } else {
         const handleValue = this.$store.state.handleChangeData;
@@ -173,15 +168,7 @@ export default {
     },
     // 在线打印
     async yearReportPrint() {
-      if (!this.$store.state.handleChangeData) {
-        this.$alert("请先选择区域", "您没有选择区域", {
-          confirmButtonText: "确定"
-        });
-        return false;
-      } else if (!this.yearReportDate) {
-        this.$alert("请先选择结束日期", "您没有选择结束日期", {
-          confirmButtonText: "确定"
-        });
+      if (!this.judge()) {
         return false;
       } else {
         const handleValue = this.$store.state.handleChangeData;

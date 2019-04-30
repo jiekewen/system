@@ -39,6 +39,9 @@
 .sortConfig .sortConfig-wrap .el-table th {
   color: #555;
 }
+.sortConfig .sortConfig-wrap .el-pagination {
+  float: none;
+}
 .sortConfig .sortConfig-wrap .wra-page {
   margin-top: 5vh;
   text-align: center;

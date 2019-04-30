@@ -12,24 +12,27 @@
     <!-- 个人中心 -->
     <div class="Header-box3">
       <img src="../../assets/images/home/alerm-count-icon.png" alt>
-      <router-link :to="{ path: 'messageList' }">
+      <router-link :to="{ path: '/messageList' }">
+        <!-- 报警数量 -->
         <el-badge :value="alerm.count" class="item-badge"></el-badge>
       </router-link>
       <img src="../../assets/images/home/user-icon.png" alt>
       <el-dropdown size="small" placement="bottom-start" trigger="click">
+        <!-- 登录人 -->
         <button class="user-name-btn">
           {{this.$store.state.user}}
           <i class="el-icon-arrow-down"></i>
         </button>
         <el-dropdown-menu style="margin-top:-20px" slot="dropdown">
           <el-dropdown-item style="border-bottom:1px solid #ccc;">
-            <router-link :to="{ path: 'user' }">个人中心</router-link>
+            <router-link :to="{ path: '/user' }">个人中心</router-link>
           </el-dropdown-item>
           <el-dropdown-item>
             <router-link :to="{ path: '/' }">退出登录</router-link>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
+      <!-- 超级用户按钮 -->
       <button class="control-btn">
         <img src="../../assets/images/home/set-message-icon.png" alt>
       </button>
