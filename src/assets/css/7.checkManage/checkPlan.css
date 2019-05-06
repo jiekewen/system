@@ -31,5 +31,9 @@
 }
 .checkPlan .checkPlan-wrap .wrap-table-page {
   margin-top: 5vh;
-  text-align: center !important;
+  text-align: center;
+}
+.checkPlan .checkPlan-wrap .wrap-table-page .page {
+  float: none;
+  margin: 0 auto;
 }

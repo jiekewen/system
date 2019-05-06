@@ -11,3 +11,10 @@
   background-color: #fff;
   padding: 50px;
 }
+.user .form-submit1 .form-submit2 .form-item-btn {
+  display: flex;
+  width: 400px;
+}
+.user .form-submit1 .form-submit2 .form-item-btn .confirm {
+  margin-left: 60px;
+}

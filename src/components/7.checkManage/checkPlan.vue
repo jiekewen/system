@@ -13,15 +13,15 @@
     <div class="checkPlan-wrap">
       <!-- 下部列表 -->
       <div class="wrap-table">
-        <el-table :data="tableData" style="width: 100%;" @current-change="handleCurrentChange">
+        <el-table :data="tableData" style="width: 100%;">
           <el-table-column label="序号" type="index" width="100"></el-table-column>
-          <el-table-column label="计划名称">{{planName}}</el-table-column>
-          <el-table-column prop="b" label="项目名称">我司日常检查</el-table-column>
-          <el-table-column prop="c" label="巡检类型">正常巡检</el-table-column>
-          <el-table-column prop="d" label="巡检人"></el-table-column>
-          <el-table-column prop="e" label="开始时间"></el-table-column>
-          <el-table-column prop="f" label="结束时间"></el-table-column>
-          <el-table-column prop="g" label="创建时间"></el-table-column>
+          <el-table-column prop="taskname" label="计划名称"></el-table-column>
+          <el-table-column prop="eid" label="项目名称"></el-table-column>
+          <el-table-column prop="type" label="巡检类型"></el-table-column>
+          <el-table-column prop="operator" label="巡检人"></el-table-column>
+          <el-table-column prop="starttime" label="开始时间"></el-table-column>
+          <el-table-column prop="endtime" label="结束时间"></el-table-column>
+          <el-table-column prop="createtime" label="创建时间"></el-table-column>
           <el-table-column width="120" fixed="right" label="巡检计划操作">
             <template slot-scope="scope">
               <el-button
@@ -32,7 +32,7 @@
                 circle
               ></el-button>
               <el-button
-                @click="handleDelete(scope.$index, scope.row)"
+                @click="handleDelete(scope.$index, tableData)"
                 size="mini"
                 type="danger"
                 icon="el-icon-delete"
@@ -41,6 +41,18 @@
             </template>
           </el-table-column>
         </el-table>
+        <!-- 分页 -->
+        <div class="wrap-table-page">
+          <el-pagination
+            @current-change="currentPage"
+            class="page"
+            background
+            layout="prev, pager, next"
+            :page-size="pagesize"
+            :current-page.sync="currentPageNum"
+            :total="pageTotal"
+          ></el-pagination>
+        </div>
         <!-- 详情弹出框 -->
         <el-dialog
           style="margin:0;height:100%;"
@@ -54,17 +66,15 @@
           <el-form
             style="width:60%"
             ref="dynamicValidateForm"
-            :rules="rules"
             label-position="right"
             label-width="100px"
-            :model="planFormData"
           >
             <el-form-item label="计划名称 :" prop="name">
-              <el-input v-model="planName"></el-input>
+              <el-input></el-input>
             </el-form-item>
             <el-form-item label="项目名称 :">{{this.$store.state.projectName}}</el-form-item>
             <el-form-item label="巡检类型 :">
-              <el-select @change="handlechange" v-model="checkCurrent" placeholder="请选择">
+              <el-select @change="handlechange" placeholder="请选择">
                 <el-option
                   v-for="item in checkData"
                   :key="item.value"
@@ -73,24 +83,16 @@
                 ></el-option>
               </el-select>
             </el-form-item>
+            <!-- 巡检范围 -->
             <el-form-item label="巡检范围 :">
-              <el-select @change="handlechange2" v-model="positionCurrent" placeholder="请选择">
-                <el-option
-                  v-for="item in positionData"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value"
-                ></el-option>
-              </el-select>
+              <el-input v-model="positionData"></el-input>
             </el-form-item>
-            <el-form-item label="巡检内容 :" prop="description">
-              <el-input type="textarea" v-model="planFormData.description"></el-input>
+            <el-form-item label="巡检内容 :">
+              <el-input type="textarea"></el-input>
             </el-form-item>
             <el-form-item label="选择时间 :">
-              <!-- format="yyyy年MM月dd日" -->
               <el-date-picker
                 value-format="yyyy-MM-dd"
-                v-model="value1"
                 type="daterange"
                 range-separator="至"
                 start-placeholder="开始日期"
@@ -98,7 +100,7 @@
               ></el-date-picker>
             </el-form-item>
             <el-form-item label=" 执 行 人 :" prop="user">
-              <el-input v-model="planFormData.user"></el-input>
+              <el-input></el-input>
             </el-form-item>
             <el-form-item label="创建时间 :"></el-form-item>
           </el-form>
@@ -111,14 +113,10 @@
             <el-button
               class="btn-left"
               type="primary"
-              @click="asd"
+              @click="recompose"
             >&nbsp;&nbsp;确&nbsp;&nbsp;定&nbsp;&nbsp;</el-button>
           </div>
         </el-dialog>
-        <!-- 分页 -->
-        <div class="wrap-table-page">
-          <el-pagination background layout="prev, pager, next" :total="100"></el-pagination>
-        </div>
       </div>
     </div>
   </div>
@@ -129,100 +127,74 @@ export default {
   name: "CheckPlan",
   data() {
     return {
-      // 计划名称
-      planName: "",
-      // dialod
-      planFormData: {
-        name: "",
-        type: [],
-        description: "",
-        user: ""
-      },
-      rules: {
-        description: [
-          {
-            required: true,
-            message: "请填写巡检内容",
-            trigger: "blur"
-          }
-        ],
-        name: [{ required: true, message: "请填写计划名称", trigger: "blur" }],
-        user: [{ required: true, message: "请填写巡检人", trigger: "blur" }]
-      },
-      positionData: [
-        {
-          value: "新工厂配电室",
-          label: "新工厂配电室"
-        },
-        {
-          value: "工厂ipanel柜",
-          label: "工厂ipanel柜"
-        },
-        {
-          value: "实验柜",
-          label: "实验柜"
-        }
-      ],
+      // 巡检范围
+      positionData: "",
+      // 巡检类型
       checkData: [
         {
           value: "正常巡检",
           label: "正常巡检"
-        },
-        {
-          value: "异常巡检",
-          label: "异常巡检"
         }
-      ],
+      ], //巡检类型
       checkCurrent: "正常巡检",
-      positionCurrent: "新工厂配电室",
-      value1: "",
-      // dialod,
-      tableData: [
-        {
-          a: "对强电场电气火灾接线1",
-          b: "我司日常检查",
-          c: "正常巡检",
-          d: "王小二",
-          e: "2019-04-29",
-          f: "2019-04-30",
-          g: "2019-05-01"
-        },
-        {
-          a: "对强电场电气火灾接线2",
-          b: "我司日常检查2",
-          c: "正常巡检",
-          d: "王小二2",
-          e: "2019-04-29",
-          f: "2019-04-30",
-          g: "2019-05-01"
-        },
-        {
-          a: "对强电场电气火灾接线3",
-          b: "我司日常检查3",
-          c: "正常巡检",
-          d: "王小二3",
-          e: "2019-04-29",
-          f: "2019-04-30",
-          g: "2019-05-01"
-        }
-      ],
+      // 列表数据
+      tableData: [],
+      // 当前行的所有数据
       currentRow: null,
-      dialogFormVisible: false
+      // 是否弹窗
+      dialogFormVisible: false,
+      // 列表选中行id
+      tableId: "",
+      // 分页
+      // 当前页
+      currentPageNum: 1,
+      // 页码总计
+      pageTotal: 1,
+      // 每页数据数
+      pagesize: 5
     };
   },
+  created() {
+    this.getTableData();
+    // 储存当前页
+    this.currentPageNum = Number(localStorage.getItem("pagination")) || 1;
+    this.currentPage(this.currentPageNum);
+  },
+  beforeUpdate() {
+    localStorage.setItem("pagination", this.currentPageNum);
+  },
+  beforeDestroy() {
+    localStorage.setItem("pagination", "1");
+  },
   methods: {
-    // dialog
-    asd() {
+    // 当前页
+    currentPage(cpage) {
+      this.loading = true;
+      this.currentPageNum = cpage;
+      this.getTableData();
+    },
+    // 获取列表数据
+    getTableData() {
+      const count = {
+        pageNum: Number(localStorage.getItem("pagination")) || 1,
+        pagesize: this.pagesize
+      };
+      this.$http
+        .get("patrol/getAllPatrol", { params: count })
+        .then(response => {
+          this.tableData = response.data.data.content;
+          this.pageTotal = response.data.data.totalElements;
+        });
+    },
+    // 修改dialog
+    recompose() {
       this.dialogFormVisible = false;
     },
+    // 巡检类型
     handlechange(val) {
       this.value = val;
-      console.log("this.value", this.value);
     },
-    handlechange2(val) {
-      this.value = val;
-      console.log("this.value", this.value);
-    },
+    // 提交修改
     planSubmit(formName) {
       // 计划名称
       console.log("this.planFormData.name", this.planFormData.name);
@@ -238,7 +210,6 @@ export default {
 
       // 执行人
       console.log("this.planFormData.user", this.planFormData.user);
-
       this.$refs[formName].validate(valid => {
         if (valid) {
           alert("submit!");
@@ -248,15 +219,15 @@ export default {
         }
       });
     },
+    // 弹窗返回
     retreat() {
       window.history.back();
     },
-    // dialog
     // 新增巡检计划
     addNewPlan() {
       this.$router.push({ path: "/checkPlan/addNewPlan" });
     },
-    // 修改
+    // 表格修改
     handleEdit(index, row) {
       console.log(index, row);
       console.log("this.tableData[index]", this.tableData[index]);
@@ -270,16 +241,34 @@ export default {
       dd.push(this.tableData[index].e);
       dd.push(this.tableData[index].f);
       // 开始时间结束时间
-      this.value1 = dd;
+      this.datePicker = dd;
     },
     // 删除
     handleDelete(index, row) {
-      console.log(index, row);
-    },
-    // 点击列表获取当前行
-    handleCurrentChange(val) {
-      this.currentRow = val;
-      console.log("val", val);
+      this.$confirm("将删除此条计划，是否继续?", "提示", {
+        confirmButtonText: "确定",
+        cancelButtonText: "取消",
+        type: "warning"
+      })
+        .then(() => {
+          // 上传id
+          let currentId = { id: row[index].id };
+          this.$http
+            .delete("patrol/deletePatrol", { params: currentId })
+            .then(res => {
+              this.$message({
+                type: "success",
+                message: "删除成功!"
+              });
+              location.reload();
+            });
+        })
+        .catch(() => {
+          this.$message({
+            type: "info",
+            message: "已取消删除"
+          });
+        });
     }
   }
 };

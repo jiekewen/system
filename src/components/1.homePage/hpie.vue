@@ -31,14 +31,13 @@ export default {
         // 标注
         legend: {
           orient: "vertical",
-          x: "80%",
-          y: "20%",
+          x: "65%",
           data: this.receiveData.name
         },
         // 分列数据
         series: [
           {
-            center: ["40%", "50%"],
+            center: ["32%", "40%"],
             type: "pie",
             radius: ["30%", "60%"],
             label: {

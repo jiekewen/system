@@ -149,19 +149,31 @@ export default {
     };
   },
   created() {
+    // 储存当前页
+    this.pageNo = Number(localStorage.getItem("currentPage")) || 1;
+    this.pageChange(this.pageNo);
     // 获取列表总数
     this.$http.get("set/equipmentCount").then(response => {
       this.pageTotal = response.data.data;
-      console.log("response", response);
     });
     // 列表数据
     this.getTableList();
+  },
+  beforeUpdate() {
+    localStorage.setItem("currentPage", this.pageNo);
+  },
+  beforeDestroy() {
+    localStorage.setItem("currentPage", "1");
   },
   methods: {
     async getTableList() {
       //  发送请求
       await this.$http
-        .get(`set/equipmentListByEid?pageNum=${this.pageNo}&pageSize=${10}`)
+        .get(
+          `set/equipmentListByEid?pageNum=${Number(
+            localStorage.getItem("currentPage")
+          ) || 1}&pageSize=${10}`
+        )
         .then(response => {
           if (response.data.code == 0) {
             this.tableData = response.data.data;
@@ -180,8 +192,6 @@ export default {
 
     // 级联选择器change事件
     handleChange(value) {
-      console.log("value", value);
-
       //把分类赋值checkedSelect
       this.checkedSelect = value;
     },

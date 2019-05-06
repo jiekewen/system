@@ -24,9 +24,13 @@
           <el-form-item label="确认密码" prop="age">
             <el-input type="password" v-model.number="ruleForm2.age" autocomplete="off"></el-input>
           </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
-            <el-button @click="resetForm('ruleForm2')">重置</el-button>
+          <el-form-item class="form-item-btn">
+            <el-button type="info" @click="backlast">&nbsp;&nbsp;返&nbsp;&nbsp;回&nbsp;&nbsp;</el-button>
+            <el-button
+              class="confirm"
+              type="primary"
+              @click="submitForm('ruleForm2')"
+            >&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -87,6 +91,9 @@ export default {
     };
   },
   methods: {
+    backlast() {
+      window.history.go(-1);
+    },
     submitForm(formName) {
       this.$refs[formName].validate(valid => {
         if (valid) {
