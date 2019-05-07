@@ -17,7 +17,7 @@ export default new Vuex.Store({
     // 打印渲染数据标题
     dayPrintTitle: "",
     // 项目名称
-    projectName: "强华印刷厂电气火灾项目"
+    projectName: "Root"
   },
   mutations: {
     // 数据处理方法

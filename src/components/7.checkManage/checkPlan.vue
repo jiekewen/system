@@ -26,7 +26,7 @@
             <template slot-scope="scope">
               <el-button
                 size="mini"
-                @click="handleEdit(scope.$index, scope.row),dialogFormVisible = true"
+                @click="recompose(scope.$index, scope.row)"
                 type="info"
                 icon="el-icon-edit"
                 circle
@@ -65,16 +65,21 @@
         >
           <el-form
             style="width:60%"
-            ref="dynamicValidateForm"
+            ref="ValidateForm"
+            :rules="rules"
             label-position="right"
             label-width="100px"
+            :model="planFormData"
           >
+            <!-- 计划名称 -->
             <el-form-item label="计划名称 :" prop="name">
-              <el-input></el-input>
+              <el-input v-model="planFormData.name"></el-input>
             </el-form-item>
-            <el-form-item label="项目名称 :">{{this.$store.state.projectName}}</el-form-item>
+            <!-- 项目名称 -->
+            <el-form-item label="项目名称 :">{{this.planFormData.eid}}</el-form-item>
+            <!-- 巡检类型 -->
             <el-form-item label="巡检类型 :">
-              <el-select @change="handlechange" placeholder="请选择">
+              <el-select @change="handlechange" v-model="checkCurrent" placeholder="请选择">
                 <el-option
                   v-for="item in checkData"
                   :key="item.value"
@@ -84,25 +89,30 @@
               </el-select>
             </el-form-item>
             <!-- 巡检范围 -->
-            <el-form-item label="巡检范围 :">
-              <el-input v-model="positionData"></el-input>
+            <el-form-item label="巡检范围 :" prop="positionData">
+              <el-input v-model="planFormData.positionData"></el-input>
             </el-form-item>
-            <el-form-item label="巡检内容 :">
-              <el-input type="textarea"></el-input>
+            <!-- 巡检内容 -->
+            <el-form-item label="巡检内容 :" prop="description">
+              <el-input type="textarea" v-model="planFormData.description"></el-input>
             </el-form-item>
+            <!-- 选择时间 -->
             <el-form-item label="选择时间 :">
               <el-date-picker
                 value-format="yyyy-MM-dd"
+                v-model="planFormData.pickerDate"
                 type="daterange"
                 range-separator="至"
                 start-placeholder="开始日期"
                 end-placeholder="结束日期"
               ></el-date-picker>
             </el-form-item>
-            <el-form-item label=" 执 行 人 :" prop="user">
-              <el-input></el-input>
+            <!-- 执行人 -->
+            <el-form-item label="执行人 :" prop="user">
+              <el-input v-model="planFormData.user"></el-input>
             </el-form-item>
-            <el-form-item label="创建时间 :"></el-form-item>
+            <!-- 创建时间 -->
+            <el-form-item label="创建时间 :">{{this.planFormData.showcreatetime}}</el-form-item>
           </el-form>
           <div slot="footer" class="dialog-footer">
             <el-button
@@ -113,7 +123,7 @@
             <el-button
               class="btn-left"
               type="primary"
-              @click="recompose"
+              @click="planSubmit('ValidateForm')"
             >&nbsp;&nbsp;确&nbsp;&nbsp;定&nbsp;&nbsp;</el-button>
           </div>
         </el-dialog>
@@ -127,9 +137,33 @@ export default {
   name: "CheckPlan",
   data() {
     return {
-      // 巡检范围
-      positionData: "",
-      // 巡检类型
+      // 弹窗数据
+      // 提交数据
+      planFormData: {
+        eid: "", // 项目名称
+        name: "", //计划名称
+        type: [], //巡检内容
+        description: "", //巡检内容
+        user: "", //巡检人
+        positionData: "", //巡检范围
+        showcreatetime: "", //展示创建时间
+        formatcreatetime: "", //格式创建时间
+        pickerDate: "" // 时间选择
+      },
+      rules: {
+        description: [
+          {
+            required: true,
+            message: "请填写巡检内容",
+            trigger: "blur"
+          }
+        ],
+        name: [{ required: true, message: "请填写计划名称", trigger: "blur" }],
+        user: [{ required: true, message: "请填写巡检人", trigger: "blur" }],
+        positionData: [
+          { required: true, message: "请填写巡检范围", trigger: "blur" }
+        ]
+      },
       checkData: [
         {
           value: "正常巡检",
@@ -137,6 +171,7 @@ export default {
         }
       ], //巡检类型
       checkCurrent: "正常巡检",
+      // 弹窗数据完
       // 列表数据
       tableData: [],
       // 当前行的所有数据
@@ -151,10 +186,11 @@ export default {
       // 页码总计
       pageTotal: 1,
       // 每页数据数
-      pagesize: 5
+      pagesize: 10
     };
   },
   created() {
+    // 获取列表
     this.getTableData();
     // 储存当前页
     this.currentPageNum = Number(localStorage.getItem("pagination")) || 1;
@@ -187,61 +223,36 @@ export default {
         });
     },
     // 修改dialog
-    recompose() {
-      this.dialogFormVisible = false;
-    },
     // 巡检类型
     handlechange(val) {
       this.value = val;
-    },
-    // 提交修改
-    planSubmit(formName) {
-      // 计划名称
-      console.log("this.planFormData.name", this.planFormData.name);
-      // 项目类型
-      console.log("this.checkCurrent", this.checkCurrent);
-      // 巡讲范围
-      console.log("this.positionCurrent", this.positionCurrent);
-      // 巡检内容
-      console.log(
-        "this.planFormData.description",
-        this.planFormData.description
-      );
-
-      // 执行人
-      console.log("this.planFormData.user", this.planFormData.user);
-      this.$refs[formName].validate(valid => {
-        if (valid) {
-          alert("submit!");
-        } else {
-          console.log("error submit!!");
-          return false;
-        }
-      });
-    },
-    // 弹窗返回
-    retreat() {
-      window.history.back();
     },
     // 新增巡检计划
     addNewPlan() {
       this.$router.push({ path: "/checkPlan/addNewPlan" });
     },
     // 表格修改
-    handleEdit(index, row) {
-      console.log(index, row);
-      console.log("this.tableData[index]", this.tableData[index]);
+    recompose(index, row) {
+      this.dialogFormVisible = true;
       // 计划名称
-      this.planFormData.name = this.tableData[index].b;
-      // 执行人
-      this.planFormData.user = this.tableData[index].d;
-      // 执行内容
-      this.planFormData.description = this.tableData[index].a;
-      const dd = [];
-      dd.push(this.tableData[index].e);
-      dd.push(this.tableData[index].f);
-      // 开始时间结束时间
-      this.datePicker = dd;
+      this.planFormData.name = this.tableData[index].taskname;
+      // 巡检范围
+      this.planFormData.positionData = this.tableData[index].patrolrange;
+      // 巡检内容
+      this.planFormData.description = this.tableData[index].content;
+      // 巡检人
+      this.planFormData.user = this.tableData[index].operator;
+      //  时间选择
+      this.planFormData.pickerDate = [
+        this.tableData[index].starttime,
+        this.tableData[index].endtime
+      ];
+      // id
+      this.tableId = this.tableData[index].id;
+      // 项目名称
+      this.planFormData.eid = this.tableData[index].eid;
+      // 创建时间
+      this.planFormData.showcreatetime = this.tableData[index].createtime;
     },
     // 删除
     handleDelete(index, row) {
@@ -269,6 +280,60 @@ export default {
             message: "已取消删除"
           });
         });
+    },
+    // 提交修改
+    planSubmit(formName) {
+      if (this.planFormData.pickerDate == "") {
+        this.$message({
+          message: "请选择开始时间和结束时间",
+          center: true
+        });
+        return false;
+      } else {
+        this.$refs[formName].validate(valid => {
+          if (valid) {
+            // 生成发送数据
+            const sendData = {};
+            // 巡检内容
+            sendData.content = this.planFormData.description;
+            // 创建时间
+            sendData.createtime = this.planFormData.showcreatetime;
+            // 开始时间
+            sendData.endtime = this.planFormData.pickerDate[1];
+            // 巡检人
+            sendData.operator = this.planFormData.user;
+            // 巡检范围
+            sendData.patrolrange = this.planFormData.positionData;
+            // 开始时间
+            sendData.starttime = this.planFormData.pickerDate[0];
+            // 计划名称
+            sendData.taskname = this.planFormData.name;
+            // 巡检类型
+            sendData.type = this.checkCurrent;
+            // id
+            sendData.id = this.tableId;
+            // eid
+            sendData.eid = this.planFormData.eid;
+            this.$http
+              .post("patrol/updatePatrol", sendData)
+              .then(res => {
+                this.$alert("保存成功", "新增计划保存成功", {
+                  confirmButtonText: "确定"
+                }).then(() => {
+                  history.go(0);
+                  // 获取列表
+                });
+              })
+              .catch(err => {
+                this.$alert("保存失败", "新增计划保存失败", {
+                  confirmButtonText: "确定"
+                });
+              });
+          } else {
+            return false;
+          }
+        });
+      }
     }
   }
 };
