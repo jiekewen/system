@@ -10,7 +10,8 @@ import AlarmConfig from '../components/3.dangerAlarm/alarmConfig' //报警配置
 import DataAnalysis from '../components/4.dataAnalysis/dataAnalysis' //数据分析
 import SystemLog from '../components/5.systemLog/systemLog' //系统日志
 import SystemReport from '../components/6.systemReport/systemReport' //系统报表
-import CheckCalendar from '../components/7.checkManage/checkCalendar' //巡检日历
+import CheckCalendar from '../components/7.checkManage/checkCalendar' //巡检记录
+import ExecutePlan from '../components/7.checkManage/executePlan' //巡检记录--未执行
 import CheckPlan from '../components/7.checkManage/checkPlan' //巡检计划
 import AddNewPlan from '../components/7.checkManage/addNewPlan' //巡检计划--新增巡检计划
 import Knowledge from '../components/8.knowledge/knowledge' //知识库
@@ -111,6 +112,12 @@ export default new Router({
           name: 'addNewPlan',
           path: '/checkPlan/addNewPlan',
           component: AddNewPlan,
+        },
+        // 未执行
+        {
+          name: 'executePlan',
+          path: '/checkCalendar/executePlan',
+          component: ExecutePlan,
         },
         {
           name: '知识库',

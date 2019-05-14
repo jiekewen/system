@@ -17,7 +17,9 @@ export default new Vuex.Store({
     // 打印渲染数据标题
     dayPrintTitle: "",
     // 项目名称
-    projectName: "Root"
+    projectName: "Root",
+    // 巡检修改列表
+    checkTableData: ""
   },
   mutations: {
     // 数据处理方法

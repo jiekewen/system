@@ -107,7 +107,6 @@ export default {
     },
     websocketonmessage(e) {
       // 接收数据
-
       let resData = e.data;
       let a = parseInt(JSON.parse(resData).oCount);
       let b = parseInt(JSON.parse(resData).eCount);

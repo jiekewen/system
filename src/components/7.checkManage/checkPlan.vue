@@ -148,7 +148,8 @@ export default {
         positionData: "", //巡检范围
         showcreatetime: "", //展示创建时间
         formatcreatetime: "", //格式创建时间
-        pickerDate: "" // 时间选择
+        pickerDate: "", // 时间选择
+        tableId: "" // 列表选中行id
       },
       rules: {
         description: [
@@ -178,29 +179,25 @@ export default {
       currentRow: null,
       // 是否弹窗
       dialogFormVisible: false,
-      // 列表选中行id
-      tableId: "",
+
       // 分页
       // 当前页
       currentPageNum: 1,
       // 页码总计
       pageTotal: 1,
       // 每页数据数
-      pagesize: 10
+      pagesize: 8
     };
   },
   created() {
     // 获取列表
     this.getTableData();
     // 储存当前页
-    this.currentPageNum = Number(localStorage.getItem("pagination")) || 1;
+    this.currentPageNum = Number(sessionStorage.getItem("pagination")) || 1;
     this.currentPage(this.currentPageNum);
   },
   beforeUpdate() {
-    localStorage.setItem("pagination", this.currentPageNum);
-  },
-  beforeDestroy() {
-    localStorage.setItem("pagination", "1");
+    sessionStorage.setItem("pagination", this.currentPageNum);
   },
   methods: {
     // 当前页
@@ -212,7 +209,7 @@ export default {
     // 获取列表数据
     getTableData() {
       const count = {
-        pageNum: Number(localStorage.getItem("pagination")) || 1,
+        pageNum: Number(sessionStorage.getItem("pagination")) || 1,
         pagesize: this.pagesize
       };
       this.$http
@@ -248,7 +245,7 @@ export default {
         this.tableData[index].endtime
       ];
       // id
-      this.tableId = this.tableData[index].id;
+      this.planFormData.tableId = this.tableData[index].id;
       // 项目名称
       this.planFormData.eid = this.tableData[index].eid;
       // 创建时间
@@ -311,7 +308,7 @@ export default {
             // 巡检类型
             sendData.type = this.checkCurrent;
             // id
-            sendData.id = this.tableId;
+            sendData.id = this.planFormData.tableId;
             // eid
             sendData.eid = this.planFormData.eid;
             this.$http

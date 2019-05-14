@@ -6,6 +6,7 @@
       <div class="box-icon-dataRing">
         <span>选择日期</span>
         <el-date-picker
+          @change="zz"
           format="yyyy年MM月"
           value-format="yyyy-MM"
           size="small"
@@ -66,21 +67,18 @@ export default {
       dialogTableVisible: false
     };
   },
+  created() {},
   methods: {
-    // 跳转判断
-    judge() {
+    // 查看
+    monthReportView() {
       if (!this.monthReportDate) {
         this.$alert("请先选择日期", "您没有选择日期", {
           confirmButtonText: "确定"
         });
         return false;
-      }
-    },
-    // 查看
-    monthReportView() {
-      if (!this.judge()) {
-        return false;
       } else {
+        this.dialogTableVisible = true;
+
         const handleValue = this.$store.state.handleChangeData;
         const gDate1 = new Date(this.monthReportDate);
         // 月份加一
@@ -91,7 +89,7 @@ export default {
         const gDate4 = gDate3.getDate();
         // 拼接好的日期
         const gDate5 = this.monthReportDate + "-" + gDate4;
-        const gDate5start = this.monthReportDate + "-01";
+        const gDate5start = this.monthReportDate + "01";
 
         let oCount = this.$store.state.facility.oCount;
         let eCount = this.$store.state.facility.eCount;
@@ -119,6 +117,7 @@ export default {
             dialogData.alermCount2 = resData.countResults[1].count;
             let xx = [];
             xx.push(dialogData);
+            console.log("xx", xx);
 
             // 标题;
             this.dialogMonthData = xx;
@@ -141,7 +140,10 @@ export default {
     },
     // 下载
     monthReportDownload() {
-      if (!this.judge()) {
+      if (!this.monthReportDate) {
+        this.$alert("请先选择日期", "您没有选择日期", {
+          confirmButtonText: "确定"
+        });
         return false;
       } else {
         const handleValue = this.$store.state.handleChangeData;
@@ -182,7 +184,10 @@ export default {
     },
     // 在线打印
     async monthReportPrint() {
-      if (!this.judge()) {
+      if (!this.monthReportDate) {
+        this.$alert("请先选择日期", "您没有选择日期", {
+          confirmButtonText: "确定"
+        });
         return false;
       } else {
         const handleValue = this.$store.state.handleChangeData;
@@ -231,6 +236,14 @@ export default {
               let dayPrint = [];
               dayPrint.push(dialogData);
               this.$store.state.dayPrint = dayPrint;
+              sessionStorage.setItem(
+                "title",
+                JSON.stringify(this.$store.state.dayPrintTitle)
+              );
+              sessionStorage.setItem(
+                "dialogData",
+                JSON.stringify(this.$store.state.dayPrint)
+              );
               this.$router.push({ path: "/reportPrint" });
             }
           })

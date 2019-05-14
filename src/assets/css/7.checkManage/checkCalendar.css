@@ -17,7 +17,15 @@
   margin-top: 2vh;
   height: 73vh;
 }
+.checkCalendar .checkCalendar-wrap .checkPlan-dialog {
+  background: rgba(128, 128, 128, 0.2);
+  padding-left: 60%;
+}
 .checkCalendar .checkCalendar-wrap .wrap-table-page {
   margin-top: 5vh;
   text-align: center;
+}
+.checkCalendar .checkCalendar-wrap .wrap-table-page .page {
+  float: none;
+  margin: 0 auto;
 }

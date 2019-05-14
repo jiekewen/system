@@ -150,7 +150,7 @@ export default {
   },
   created() {
     // 储存当前页
-    this.pageNo = Number(localStorage.getItem("currentPage")) || 1;
+    this.pageNo = Number(sessionStorage.getItem("currentPage")) || 1;
     this.pageChange(this.pageNo);
     // 获取列表总数
     this.$http.get("set/equipmentCount").then(response => {
@@ -160,10 +160,10 @@ export default {
     this.getTableList();
   },
   beforeUpdate() {
-    localStorage.setItem("currentPage", this.pageNo);
+    sessionStorage.setItem("currentPage", this.pageNo);
   },
   beforeDestroy() {
-    localStorage.setItem("currentPage", "1");
+    sessionStorage.setItem("currentPage", "1");
   },
   methods: {
     async getTableList() {
@@ -171,7 +171,7 @@ export default {
       await this.$http
         .get(
           `set/equipmentListByEid?pageNum=${Number(
-            localStorage.getItem("currentPage")
+            sessionStorage.getItem("currentPage")
           ) || 1}&pageSize=${10}`
         )
         .then(response => {

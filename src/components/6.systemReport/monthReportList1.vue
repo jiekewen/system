@@ -126,7 +126,6 @@ export default {
         const gDate4 = gDate3.getDate();
         // 拼接好的日期
         const gDate5 = this.monthReport.endDate + gDate4;
-
         let oCount = this.$store.state.facility.oCount;
         let eCount = this.$store.state.facility.eCount;
         // 发送请求所需数据
@@ -263,6 +262,15 @@ export default {
               dayPrint.push(dialogData);
               this.$store.state.dayPrint = dayPrint;
               this.$router.push({ path: "/reportPrint" });
+
+              sessionStorage.setItem(
+                "title",
+                JSON.stringify(this.$store.state.dayPrintTitle)
+              );
+              sessionStorage.setItem(
+                "dialogData",
+                JSON.stringify(this.$store.state.dayPrint)
+              );
             }
           })
           .catch(err => {

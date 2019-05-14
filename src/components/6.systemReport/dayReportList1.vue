@@ -237,9 +237,18 @@ export default {
                 handleValue[0] +
                 handleValue[1] +
                 " 日累积量报表";
+              sessionStorage.setItem(
+                "title",
+                JSON.stringify(this.$store.state.dayPrintTitle)
+              );
               let dayPrint = [];
               dayPrint.push(dialogData);
               this.$store.state.dayPrint = dayPrint;
+
+              sessionStorage.setItem(
+                "dialogData",
+                JSON.stringify(this.$store.state.dayPrint)
+              );
               this.$router.push({ path: "/reportPrint" });
             }
           })

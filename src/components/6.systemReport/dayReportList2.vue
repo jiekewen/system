@@ -198,6 +198,15 @@ export default {
               dayPrint.push(dialogData);
               this.$store.state.dayPrint = dayPrint;
               this.$router.push({ path: "/reportPrint" });
+
+              sessionStorage.setItem(
+                "title",
+                JSON.stringify(this.$store.state.dayPrintTitle)
+              );
+              sessionStorage.setItem(
+                "dialogData",
+                JSON.stringify(this.$store.state.dayPrint)
+              );
             }
           })
           .catch(err => {
