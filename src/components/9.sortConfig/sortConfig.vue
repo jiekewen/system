@@ -6,11 +6,36 @@
         <h3>层级配置列表</h3>
       </div>
       <div class="header-right">
+        <el-button size="small" @click="ig" type="primary" icon="el-icon-edit" circle></el-button>
         <el-cascader @change="handleChange" class="sortConfig-cascader" :options="cascaderData"></el-cascader>
         <el-button @click="handleEdit" type="primary" plain>保存修改</el-button>
       </div>
     </div>
     <div class="sortConfig-wrap">
+      <el-dialog title="编辑分类" :visible.sync="dialogVisible" width="30%">
+        <el-card>
+          <div slot="header">
+            <h5>一级分类</h5>
+            <p>{{ getStr1 }}</p>请输入：
+            <el-input placeholder="str1" v-model="str1"></el-input>
+            <p>{{ getStr2 }}</p>请输入：
+            <el-input placeholder="str2" v-model="str2"></el-input>
+            <p>{{ getStr3 }}</p>请输入：
+            <el-input placeholder="str3" v-model="str3"></el-input>
+          </div>
+          <h5>二级分类</h5>
+          <p>{{getStr4}}</p>请输入：
+          <el-input placeholder="str4" v-model="str4"></el-input>
+          <p>{{getStr5}}</p>请输入：
+          <el-input placeholder="str5" v-model="str5"></el-input>
+          <p>{{getStr6}}</p>请输入：
+          <el-input placeholder="str6" v-model="str6"></el-input>
+        </el-card>
+        <span slot="footer" class="dialog-footer">
+          <el-button @click="dialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="asd">确 定</el-button>
+        </span>
+      </el-dialog>
       <!-- 表头部分 -->
       <el-table
         v-loading="loading"
@@ -145,7 +170,20 @@ export default {
       loading: false,
       pageTotal: 0, //分页总数
       pageNo: 1, //当前页
-      pageSize: 10 //每页显示数目
+      pageSize: 10, //每页显示数目
+      dialogVisible: false,
+      str1: "新工厂配电室",
+      str2: "工厂ipanel柜",
+      str3: "实验柜",
+      getStr1: "新工厂配电室",
+      getStr2: "工厂ipanel柜",
+      getStr3: "实验柜",
+      str4: "工厂用电",
+      str5: "照明用电",
+      str6: "其他",
+      getStr4: "工厂用电",
+      getStr5: "照明用电",
+      getStr6: "其他"
     };
   },
   created() {
@@ -166,6 +204,74 @@ export default {
     sessionStorage.setItem("currentPage", "1");
   },
   methods: {
+    asd() {
+      this.getStr1 = this.str1;
+      this.getStr2 = this.str2;
+      this.getStr3 = this.str3;
+      this.getStr4 = this.str4;
+      this.getStr5 = this.str5;
+      this.getStr6 = this.str6;
+      this.cascaderData = [
+        {
+          value: this.str1,
+          label: this.str1,
+          children: [
+            {
+              value: this.str4,
+              label: this.str4
+            },
+            {
+              value: this.str5,
+              label: this.str5
+            },
+            {
+              value: this.str6,
+              label: this.str6
+            }
+          ]
+        },
+        {
+          value: this.str2,
+          label: this.str2,
+          children: [
+            {
+              value: this.str4,
+              label: this.str4
+            },
+            {
+              value: this.str5,
+              label: this.str5
+            },
+            {
+              value: this.str6,
+              label: this.str6
+            }
+          ]
+        },
+        {
+          value: this.str3,
+          label: this.str3,
+          children: [
+            {
+              value: this.str4,
+              label: this.str4
+            },
+            {
+              value: this.str5,
+              label: this.str5
+            },
+            {
+              value: this.str6,
+              label: this.str6
+            }
+          ]
+        }
+      ];
+    },
+    // 修改分类
+    ig() {
+      this.dialogVisible = true;
+    },
     async getTableList() {
       //  发送请求
       await this.$http
