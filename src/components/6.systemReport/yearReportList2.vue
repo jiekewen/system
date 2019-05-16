@@ -42,6 +42,8 @@
             <el-table-column align="center" property="alermCount1" label="报警次数1"></el-table-column>
             <el-table-column align="center" property="alerm2" label="报警类型2"></el-table-column>
             <el-table-column align="center" property="alermCount2" label="报警次数2"></el-table-column>
+            <el-table-column align="center" property="alerm3" label="报警类型3"></el-table-column>
+            <el-table-column align="center" property="alermCount3" label="报警次数3"></el-table-column>
           </el-table>
         </el-dialog>
       </div>
@@ -112,6 +114,8 @@ export default {
             dialogData.alermCount1 = resData.countResults[0].count;
             dialogData.alerm2 = resData.countResults[1].type;
             dialogData.alermCount2 = resData.countResults[1].count;
+            dialogData.alerm3 = resData.countResults[2].type;
+            dialogData.alermCount3 = resData.countResults[2].count;
             // 弹出框的数据
             let xx = [];
             xx.push(dialogData);
@@ -199,6 +203,8 @@ export default {
               dialogData.alermCount1 = resData.countResults[0].count;
               dialogData.alerm2 = resData.countResults[1].type;
               dialogData.alermCount2 = resData.countResults[1].count;
+              dialogData.alerm3 = resData.countResults[2].type;
+              dialogData.alermCount3 = resData.countResults[2].count;
               // 弹出框标题
               this.$store.state.dayPrintTitle =
                 yDateStart +

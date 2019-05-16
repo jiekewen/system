@@ -2,36 +2,15 @@
 <template>
   <div class="dataAnalysis" style="width: 1363px;">
     <!-- 上半部分 -->
-    <div class="top_Analysis">
-      <h3 class="test_data">月度报警隐患统计</h3>
-      <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane label="曲线" name="first">
-            <chartA></chartA>            
-          </el-tab-pane>
-          <el-tab-pane label="表格" name="second">
-            <tableA></tableA>
-          </el-tab-pane>
-      </el-tabs>
-    </div>
+    <dataContent1></dataContent1>
     <!-- 下半部分 -->
-    <div class="bottom_Analysis">
-      <h3 class="test_data">年度报警隐患统计</h3>
-      <el-tabs v-model="active" @tab-click="handle">
-          <el-tab-pane label="曲线" name="first">
-            <chartB></chartB>            
-          </el-tab-pane>
-          <el-tab-pane label="表格" name="second">
-            <tableB></tableB>
-          </el-tab-pane>
-      </el-tabs>
-    </div>
+    <dataContent2></dataContent2>
+    
   </div>
 </template>
 <script>
-import chartA from './chartA'
-import tableA from './tableA'
-import chartB from './chartB'
-import tableB from './tableB'
+import dataContent1 from './dataContent1'
+import dataContent2 from './dataContent2'
 
 export default {
   name: "DataAnalysis",
@@ -42,10 +21,8 @@ export default {
     };
   },
   components: {
-    chartA,
-    tableA,
-    chartB,
-    tableB
+    dataContent1,
+    dataContent2
   },
   methods: {
     handleClick(tab, event) {
@@ -105,5 +82,12 @@ export default {
 }
 .bottom_Analysis .el-tabs--top .el-table {
   font-size: 12px;
+}
+.pageA .el-pagination {
+  display: inline-block;
+  padding-top: 22px;
+  /* margin-top: 27px; */
+  /* margin-right: 46px; */
+  float: right;
 }
 </style>

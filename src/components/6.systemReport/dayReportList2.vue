@@ -41,6 +41,8 @@
             <el-table-column align="center" property="alermCount1" label="报警次数(1)"></el-table-column>
             <el-table-column align="center" property="alerm2" label="报警类型(2)"></el-table-column>
             <el-table-column align="center" property="alermCount2" label="报警次数(2)"></el-table-column>
+            <el-table-column align="center" property="alerm3" label="报警类型(3)"></el-table-column>
+            <el-table-column align="center" property="alermCount3" label="报警次数(3)"></el-table-column>
           </el-table>
         </el-dialog>
       </div>
@@ -109,6 +111,8 @@ export default {
             dialogData.alermCount1 = resData.countResults[0].count;
             dialogData.alerm2 = resData.countResults[1].type;
             dialogData.alermCount2 = resData.countResults[1].count;
+            dialogData.alerm3 = resData.countResults[2].type;
+            dialogData.alermCount3 = resData.countResults[2].count;
             let xx = [];
             xx.push(dialogData);
             console.log("xx", xx); //不删除
@@ -189,6 +193,8 @@ export default {
               dialogData.alermCount1 = resData.countResults[0].count;
               dialogData.alerm2 = resData.countResults[1].type;
               dialogData.alermCount2 = resData.countResults[1].count;
+              dialogData.alerm3 = resData.countResults[2].type;
+              dialogData.alermCount3 = resData.countResults[2].count;
               this.$store.state.dayPrintTitle =
                 this.dayReportDate +
                 handleValue[0] +

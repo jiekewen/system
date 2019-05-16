@@ -12,6 +12,8 @@
         <el-table-column align="center" property="alermCount1" label="报警次数(1)"></el-table-column>
         <el-table-column align="center" property="alerm2" label="报警类型(2)"></el-table-column>
         <el-table-column align="center" property="alermCount2" label="报警次数(2)"></el-table-column>
+        <el-table-column align="center" property="alerm3" label="报警类型(3)"></el-table-column>
+        <el-table-column align="center" property="alermCount3" label="报警次数(3)"></el-table-column>
       </el-table>
     </div>
     <div id="reportPrintBtn">

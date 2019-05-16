@@ -64,9 +64,9 @@ export default {
   data() {
     return {
       onLineDays: "",
-      offCount: "",
-      onCount: "",
-      onLinePercent: ""
+      offCount: null,
+      onCount: null,
+      onLinePercent: 0
     };
   },
   components: {
@@ -108,13 +108,19 @@ export default {
     websocketonmessage(e) {
       // 接收数据
       let resData = e.data;
-      let a = parseInt(JSON.parse(resData).oCount);
-      let b = parseInt(JSON.parse(resData).eCount);
-      this.offCount = b - a;
-      this.onCount = a;
-      this.$store.state.facility.onCount = a;
-      this.$store.state.facility.offCount = b;
-      this.onLinePercent = toPercent(a, b);
+      if (
+        JSON.parse(resData).oCount != undefined &&
+        JSON.parse(resData).eCount != undefined
+      ) {
+        let a = parseInt(JSON.parse(resData).oCount);
+        let b = parseInt(JSON.parse(resData).eCount);
+
+        this.offCount = b - a;
+        this.onCount = a;
+        this.$store.state.facility.onCount = a;
+        this.$store.state.facility.offCount = b;
+        this.onLinePercent = toPercent(a, b);
+      }
     },
     websocketclose() {
       console.log("连接关闭");

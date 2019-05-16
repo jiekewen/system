@@ -54,6 +54,8 @@
             <el-table-column align="center" property="alermCount1" label="报警次数(1)"></el-table-column>
             <el-table-column align="center" property="alerm2" label="报警类型(2)"></el-table-column>
             <el-table-column align="center" property="alermCount2" label="报警次数(2)"></el-table-column>
+            <el-table-column align="center" property="alerm3" label="报警类型(3)"></el-table-column>
+            <el-table-column align="center" property="alermCount3" label="报警次数(3)"></el-table-column>
           </el-table>
         </el-dialog>
       </div>
@@ -135,6 +137,8 @@ export default {
         this.$http
           .post("report/reportByDate", daySendData)
           .then(response => {
+            console.log("response", response);
+
             let resData = response.data.data;
             let dialogData = {};
             dialogData.eidDescription = resData.eidDescription;
@@ -144,6 +148,8 @@ export default {
             dialogData.alermCount1 = resData.countResults[0].count;
             dialogData.alerm2 = resData.countResults[1].type;
             dialogData.alermCount2 = resData.countResults[1].count;
+            dialogData.alerm3 = resData.countResults[2].type;
+            dialogData.alermCount3 = resData.countResults[2].count;
             console.log("dialogData", dialogData);
             let xx = [];
             xx.push(dialogData);
@@ -229,6 +235,8 @@ export default {
               dialogData.alermCount1 = resData.countResults[0].count;
               dialogData.alerm2 = resData.countResults[1].type;
               dialogData.alermCount2 = resData.countResults[1].count;
+              dialogData.alerm3 = resData.countResults[2].type;
+              dialogData.alermCount3 = resData.countResults[2].count;
               // 表格标题
               this.$store.state.dayPrintTitle =
                 this.dayReport.startDate +

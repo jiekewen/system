@@ -109,6 +109,7 @@
             <el-form-item label="执行人 :" prop="user">
               <el-input v-model="planFormData.user"></el-input>
             </el-form-item>
+
             <!-- 创建时间 -->
             <el-form-item label="创建时间 :">{{this.planFormData.showcreatetime}}</el-form-item>
           </el-form>
