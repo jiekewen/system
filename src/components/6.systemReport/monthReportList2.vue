@@ -79,7 +79,6 @@ export default {
         return false;
       } else {
         this.dialogTableVisible = true;
-
         const handleValue = this.$store.state.handleChangeData;
         const gDate1 = new Date(this.monthReportDate);
         // 月份加一
@@ -90,7 +89,7 @@ export default {
         const gDate4 = gDate3.getDate();
         // 拼接好的日期
         const gDate5 = this.monthReportDate + "-" + gDate4;
-        const gDate5start = this.monthReportDate + "01";
+        const gDate5start = this.monthReportDate + "-01";
 
         let oCount = this.$store.state.facility.oCount;
         let eCount = this.$store.state.facility.eCount;

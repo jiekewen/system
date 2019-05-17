@@ -19,7 +19,7 @@
         <span>结束日期</span>
         <el-date-picker
           format="yyyy年MM月"
-          value-format="yyyy-MM-"
+          value-format="yyyy-MM"
           size="small"
           v-model="monthReport.endDate"
           type="month"
@@ -118,6 +118,8 @@ export default {
       if (!this.judge()) {
         return false;
       } else {
+        console.log("this.monthReport.endDate", this.monthReport.endDate);
+
         const handleValue = this.$store.state.handleChangeData;
         const gDate1 = new Date(this.monthReport.endDate);
         // 月份加一
@@ -126,8 +128,10 @@ export default {
         const gDate3 = new Date(gDate2.setDate(gDate2.getDate() - 1));
         // 获取这个月底的日
         const gDate4 = gDate3.getDate();
+        console.log("gDate4", gDate4);
+
         // 拼接好的日期
-        const gDate5 = this.monthReport.endDate + gDate4;
+        const gDate5 = this.monthReport.endDate + "-" + gDate4;
         let oCount = this.$store.state.facility.oCount;
         let eCount = this.$store.state.facility.eCount;
         // 发送请求所需数据
@@ -175,7 +179,7 @@ export default {
           });
       }
     },
-    // 在线打印
+    //下载
     monthReportRingDownload() {
       if (!this.judge()) {
         return false;
@@ -189,7 +193,7 @@ export default {
         // 获取这个月底的日
         const gDate4 = gDate3.getDate();
         // 拼接好的日期
-        const gDate5 = this.monthReport.endDate + gDate4;
+        const gDate5 = this.monthReport.endDate + "-" + gDate4;
         let oCount = this.$store.state.facility.onCount;
         let eCount = this.$store.state.facility.offCount;
         // 发送请求所需数据
@@ -228,7 +232,7 @@ export default {
         // 获取这个月底的日
         const gDate4 = gDate3.getDate();
         // 拼接好的日期
-        const gDate5 = this.monthReport.endDate + gDate4;
+        const gDate5 = this.monthReport.endDate + "-" + gDate4;
         let oCount = this.$store.state.facility.oCount;
         let eCount = this.$store.state.facility.eCount;
         // 请求所需数据

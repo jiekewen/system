@@ -66,7 +66,7 @@ export default {
       onLineDays: "",
       offCount: null,
       onCount: null,
-      onLinePercent: 0
+      onLinePercent: null
     };
   },
   components: {
@@ -114,12 +114,11 @@ export default {
       ) {
         let a = parseInt(JSON.parse(resData).oCount);
         let b = parseInt(JSON.parse(resData).eCount);
-
-        this.offCount = b - a;
-        this.onCount = a;
-        this.$store.state.facility.onCount = a;
-        this.$store.state.facility.offCount = b;
-        this.onLinePercent = toPercent(a, b);
+        this.offCount = a;
+        this.onCount = b - a;
+        this.$store.state.facility.onCount = b - a;
+        this.$store.state.facility.offCount = a;
+        this.onLinePercent = toPercent(b - a, b);
       }
     },
     websocketclose() {
