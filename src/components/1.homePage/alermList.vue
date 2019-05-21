@@ -10,7 +10,7 @@
       style="height:13vh;width:40vw"
       align="absmiddle"
     >
-      <div class="roll-box">
+      <div class="roll-box" @click="zz">
         <div class="roll-box-left">
           <p
             :key="index"
@@ -46,13 +46,18 @@ export default {
       this.tableData2 = this.tableData.slice(4, this.tableData.length);
     });
   },
-  methods: {}
+  methods: {
+    zz() {
+      this.$router.push("/messageList");
+    }
+  }
 };
 </script>
 <style lang="less" scoped>
 .alermList {
   .roll-box {
     display: flex;
+    cursor: pointer;
     .roll-box-left {
       margin-left: 4vw;
       p {

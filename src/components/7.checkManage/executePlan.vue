@@ -58,7 +58,10 @@
           </el-form-item>
           <!-- 发现隐患数 -->
           <el-form-item label="发现隐患数 :" prop="count">
-            <el-input v-model.number="planFormData.count"></el-input>
+            <el-input
+              onkeyup="value=value.replace(/^(0+)|[^\d]+/g,'')"
+              v-model.number="planFormData.count"
+            ></el-input>
           </el-form-item>
           <!-- 完成时间 -->
           <el-form-item label="完成时间 :">
@@ -67,11 +70,12 @@
               type="datetime"
               placeholder="选择日期"
               value-format="yyyy-MM-dd HH:mm:ss"
+              :picker-options="pickerOptions"
             ></el-date-picker>
           </el-form-item>
           <!-- 备注 -->
           <el-form-item label="备注 :" prop="note">
-            <el-input autosize type="textarea" v-model="planFormData.description"></el-input>
+            <el-input autosize type="textarea" v-model="planFormData.note"></el-input>
           </el-form-item>
           <!-- 巡检是否执行 -->
           <el-form-item label="巡检是否执行 :" prop="carry">
@@ -111,6 +115,20 @@ export default {
         pickerDate: "", // 时间选择
         completetime: "" //完成时间
       },
+      // 禁选今日以后的日期
+      pickerOptions: {
+        disabledDate: time => {
+          if (this.planFormData.pickerDate[0] != "") {
+            const gDate = new Date(
+              JSON.parse(sessionStorage.getItem("formData")).starttime
+            );
+            return (
+              time.getTime() > Date.now() ||
+              time.getTime() < new Date(gDate.setDate(gDate.getDate() - 1))
+            );
+          }
+        }
+      },
       // 储存数据
       fData: {},
       // 验证规则
@@ -134,10 +152,6 @@ export default {
     };
   },
   created() {
-    console.log(
-      'JSON.parse(sessionStorage.getItem("formData"))',
-      JSON.parse(sessionStorage.getItem("formData"))
-    );
     this.initial();
   },
   methods: {
@@ -212,7 +226,7 @@ export default {
             console.log("sendData", sendData);
 
             this.$http
-              .post("patrol/updatePatrol", sendData)
+              .post("patrol/updatePatrolRecord", sendData)
               .then(res => {
                 this.$alert("保存成功", "新增计划保存成功", {
                   confirmButtonText: "确定"

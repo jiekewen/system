@@ -48,6 +48,7 @@
               range-separator="至"
               start-placeholder="开始日期"
               end-placeholder="结束日期"
+              :picker-options="pickerOptions1"
             ></el-date-picker>
           </el-form-item>
           <!-- 执行人 -->
@@ -75,6 +76,12 @@ export default {
   name: "addNewPlan",
   data() {
     return {
+      // 禁选范围
+      pickerOptions1: {
+        disabledDate: time => {
+          return time.getTime() < new Date(this.planFormData.formatcreatetime);
+        }
+      },
       // 提交数据
       planFormData: {
         name: "", //计划名称
@@ -114,6 +121,10 @@ export default {
     const cDate = getDate();
     this.planFormData.formatcreatetime = cDate[0];
     this.planFormData.showcreatetime = cDate[1];
+    console.log(
+      "this.planFormData.formatcreatetime",
+      this.planFormData.formatcreatetime
+    );
   },
   methods: {
     // 巡检类型

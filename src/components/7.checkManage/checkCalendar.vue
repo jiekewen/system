@@ -7,7 +7,7 @@
     <div class="checkCalendar-wrap">
       <!-- 下部列表 -->
       <div class="wrap-table">
-        <el-table :data="tableData" style="width:100%;" @current-change="handleEdit">
+        <el-table :data="tableData" style="width:100%;">
           <el-table-column align="center" label="序号" type="index" width="100"></el-table-column>
           <el-table-column prop="eid" label="巡检项目名称"></el-table-column>
           <el-table-column prop="type" label="巡检类型"></el-table-column>
@@ -54,7 +54,6 @@
         <!-- 详情弹出框 -->
         <el-dialog
           style="margin:0;height:100%;"
-          modal
           class="checkPlan-dialog"
           title="查看详情"
           :visible.sync="dialogFormVisible"
@@ -63,18 +62,16 @@
         >
           <el-form
             style="width:60%"
-            ref="ValidateForm"
-            :rules="rules"
             label-position="right"
-            label-width="100px"
+            label-width="120px"
             :model="planFormData"
           >
             <!-- 计划名称 -->
-            <el-form-item label="计划名称 :" prop="name">
-              <el-input v-model="planFormData.name"></el-input>
+            <el-form-item label="计划名称 :">
+              <el-input disabled v-model="planFormData.name"></el-input>
             </el-form-item>
             <!-- 项目名称 -->
-            <el-form-item label="项目名称 :">{{this.planFormData.eid}}</el-form-item>
+            <el-form-item label="项目名称 :">{{this.$store.state.projectName}}</el-form-item>
             <!-- 巡检类型 -->
             <el-form-item label="巡检类型 :">
               <el-select @change="handlechange" v-model="checkCurrent" placeholder="请选择">
@@ -87,16 +84,17 @@
               </el-select>
             </el-form-item>
             <!-- 巡检范围 -->
-            <el-form-item label="巡检范围 :" prop="positionData">
-              <el-input v-model="planFormData.positionData"></el-input>
+            <el-form-item label="巡检范围 :">
+              <el-input disabled v-model="planFormData.positionData"></el-input>
             </el-form-item>
             <!-- 巡检内容 -->
-            <el-form-item label="巡检内容 :" prop="description">
-              <el-input type="textarea" v-model="planFormData.description"></el-input>
+            <el-form-item label="巡检内容 :">
+              <el-input disabled autosize type="textarea" v-model="planFormData.description"></el-input>
             </el-form-item>
             <!-- 选择时间 -->
             <el-form-item label="选择时间 :">
               <el-date-picker
+                disabled
                 value-format="yyyy-MM-dd"
                 v-model="planFormData.pickerDate"
                 type="daterange"
@@ -106,13 +104,36 @@
               ></el-date-picker>
             </el-form-item>
             <!-- 执行人 -->
-            <el-form-item label="执行人 :" prop="user">
-              <el-input v-model="planFormData.user"></el-input>
+            <el-form-item label="执行人 :">
+              <el-input disabled v-model="planFormData.user"></el-input>
             </el-form-item>
-
-            <!-- 创建时间 -->
-            <el-form-item label="创建时间 :">{{this.planFormData.showcreatetime}}</el-form-item>
+            <!-- 发现隐患数 -->
+            <el-form-item label="发现隐患数 :" prop="count">
+              <el-input disabled v-model.number="planFormData.count"></el-input>
+            </el-form-item>
+            <!-- 完成时间 -->
+            <el-form-item label="完成时间 :">
+              <el-date-picker
+                disabled
+                v-model="planFormData.completetime"
+                type="datetime"
+                placeholder="选择日期"
+                value-format="yyyy-MM-dd HH:mm:ss"
+              ></el-date-picker>
+            </el-form-item>
+            <!-- 备注 -->
+            <el-form-item label="备注 :" prop="note">
+              <el-input disabled autosize type="textarea" v-model="planFormData.note"></el-input>
+            </el-form-item>
+            <!-- 巡检是否执行 -->
+            <el-form-item label="巡检是否执行 :">
+              <el-radio-group v-model="planFormData.carry">
+                <el-radio disabled label="0">未执行</el-radio>
+                <el-radio disabled label="1">已执行</el-radio>
+              </el-radio-group>
+            </el-form-item>
           </el-form>
+
           <div slot="footer" class="dialog-footer">
             <el-button
               type="primary"
@@ -122,7 +143,7 @@
             <el-button
               class="btn-left"
               type="primary"
-              @click="planSubmit('ValidateForm')"
+              @click="dialogFormVisible = false"
             >&nbsp;&nbsp;确&nbsp;&nbsp;定&nbsp;&nbsp;</el-button>
           </div>
         </el-dialog>
@@ -140,31 +161,21 @@ export default {
       // 弹窗数据
       // 提交数据
       planFormData: {
-        eid: "", // 项目名称
+        tableId: "", //id
+        eid: "", //eid
+        note: "", //备注
+        count: 0, //隐患数
+        carry: "", //是否执行
         name: "", //计划名称
         type: [], //巡检内容
         description: "", //巡检内容
         user: "", //巡检人
         positionData: "", //巡检范围
-        showcreatetime: "", //展示创建时间
-        formatcreatetime: "", //格式创建时间
         pickerDate: "", // 时间选择
-        tableId: "" // 列表选中行id
+        completetime: "" //完成时间
       },
-      rules: {
-        description: [
-          {
-            required: true,
-            message: "请填写巡检内容",
-            trigger: "blur"
-          }
-        ],
-        name: [{ required: true, message: "请填写计划名称", trigger: "blur" }],
-        user: [{ required: true, message: "请填写巡检人", trigger: "blur" }],
-        positionData: [
-          { required: true, message: "请填写巡检范围", trigger: "blur" }
-        ]
-      },
+      // 储存数据
+      fData: {},
       checkData: [
         {
           value: "正常巡检",
@@ -179,16 +190,6 @@ export default {
       currentRow: null,
       // 是否弹窗
       dialogFormVisible: false,
-
-      // 列表数据
-      tableData: [],
-      // 当前行的所有数据
-      currentRow: null,
-      // 是否弹窗
-      dialogFormVisible: false,
-      // 列表选中行id
-      tableId: "",
-
       // 分页
       // 当前页
       currentPageNum: 1,
@@ -225,9 +226,7 @@ export default {
       this.currentPageNum = cpage;
       this.getTableData();
     },
-    handleEdit(row) {
-      console.log(row);
-    },
+
     // 获取列表数据
     getTableData() {
       const count = {
@@ -246,9 +245,17 @@ export default {
     handlechange(val) {
       this.value = val;
     },
-    // 表格修改
+    // 查看详情
     recompose(index, row) {
       this.dialogFormVisible = true;
+      console.log("this.tableData[index].note", this.tableData[index].note);
+
+      // 是否执行
+      this.planFormData.carry = this.tableData[index].status.toString();
+      // 备注
+      this.planFormData.note = this.tableData[index].note;
+      // 隐患数
+      this.planFormData.count = this.tableData[index].dangernum;
       // 计划名称
       this.planFormData.name = this.tableData[index].taskname;
       // 巡检范围
@@ -257,7 +264,7 @@ export default {
       this.planFormData.description = this.tableData[index].content;
       // 巡检人
       this.planFormData.user = this.tableData[index].operator;
-      //  时间选择
+      //  选择时间
       this.planFormData.pickerDate = [
         this.tableData[index].starttime,
         this.tableData[index].endtime
@@ -266,8 +273,8 @@ export default {
       this.planFormData.tableId = this.tableData[index].id;
       // 项目名称
       this.planFormData.eid = this.tableData[index].eid;
-      // 创建时间
-      this.planFormData.showcreatetime = this.tableData[index].createtime;
+      // 完成时间
+      this.planFormData.completetime = this.tableData[index].completetime;
     }
   }
 };
@@ -309,6 +316,18 @@ export default {
       }
       .el-dialog__body {
         padding: 0 0 0 2vw;
+        .el-radio__input.is-disabled + span.el-radio__label {
+          color: #666;
+        }
+        .el-range-editor.is-disabled input {
+          color: #666;
+        }
+        .el-textarea.is-disabled .el-textarea__inner {
+          color: #666;
+        }
+        .el-input.is-disabled .el-input__inner {
+          color: #666;
+        }
       }
       .el-dialog__footer {
         width: 80%;
