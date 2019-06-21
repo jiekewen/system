@@ -4,18 +4,72 @@ body {
   width: 100%;
 }
 .login {
-  width: 100vw;
   position: relative;
-  height: 100vh;
-  text-align: center;
-  background: url(../../images/login/loginbg.jpg) no-repeat left;
+  width: 100%;
+  height: 100%;
+  background-image: url(../../images/login/login-bg.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  min-height: 700px;
 }
-.login .login-submit {
+.login .login-top {
+  position: relative;
+}
+.login .login-top .login-title {
   position: absolute;
-  padding-top: 10%;
-  top: 20%;
-  left: 40%;
-  width: 432px;
-  height: 311px;
-  background: url(../../images/login/u0.png) no-repeat center;
+  top: 40vh;
+  left: 24vw;
+}
+.login .login-top .login-title p {
+  font-size: 2vw;
+  text-shadow: 1px 1px #fff;
+}
+.login .login-top .login-submit {
+  padding: 2% 3%;
+  position: absolute;
+  border-radius: 2%;
+  width: 13vw;
+  min-width: 200px;
+  height: 33vh;
+  min-height: 300px;
+  top: 20vh;
+  right: 10vw;
+  border: 1px solid #333;
+  background-color: #fff;
+}
+.login .login-top .login-submit .submit-title {
+  font-size: 22px;
+  height: 6vh;
+}
+.login .login-top .login-submit .submit-user {
+  margin: 5% auto;
+}
+.login .login-top .login-submit .submit-user .el-input_user img {
+  margin-top: 1px;
+  margin-left: -4px;
+}
+.login .login-top .login-submit .submit-passWord {
+  margin-top: 10%;
+}
+.login .login-top .login-submit .submit-passWord .el-input_password img {
+  margin-top: 1px;
+  margin-left: -4px;
+}
+.login .login-top .login-submit .submit-elBtn {
+  margin-top: 20%;
+  margin-left: 0.8vw;
+  padding: 12px 5vw;
+}
+.login .login-bottom {
+  text-align: center;
+  position: absolute;
+  bottom: 5vh;
+  left: 20vw;
+  width: 60vw;
+  height: 60px;
+  line-height: 60px;
+  border-top: 1px solid #888;
+  font-size: 14px;
+  color: #888;
 }

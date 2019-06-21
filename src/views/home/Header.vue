@@ -11,8 +11,8 @@
     </div>
     <!-- 个人中心 -->
     <div class="Header-box3">
-      <img src="../../assets/images/home/alerm-count-icon.png" alt>
       <router-link :to="{ path: '/messageList' }">
+        <img src="../../assets/images/home/alerm-count-icon.png" alt>
         <!-- 报警数量 -->
         <el-badge :value="alerm.count" class="item-badge"></el-badge>
       </router-link>
@@ -33,7 +33,7 @@
         </el-dropdown-menu>
       </el-dropdown>
       <!-- 超级用户按钮 -->
-      <button class="control-btn">
+      <button @click="tableShow" class="control-btn">
         <img src="../../assets/images/home/set-message-icon.png" alt>
       </button>
     </div>
@@ -59,6 +59,11 @@ export default {
       this.$http.get("homePage/getOnLineDays").then(res => {
         this.onLineDays = res.data.data;
       });
+  },
+  methods: {
+    tableShow() {
+      this.$router.push("/tableShow");
+    }
   }
 };
 </script>

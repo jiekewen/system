@@ -248,8 +248,6 @@ export default {
     // 查看详情
     recompose(index, row) {
       this.dialogFormVisible = true;
-      console.log("this.tableData[index].note", this.tableData[index].note);
-
       // 是否执行
       this.planFormData.carry = this.tableData[index].status.toString();
       // 备注

@@ -58,7 +58,7 @@
           align="center"
           prop="switchhouse"
           label="区域"
-          :filters="[{ text: '新工厂配电室', value: '新工厂配电室' }, { text: '工厂ipanel柜', value: '工厂ipanel柜' },{ text: '实现柜', value: '实验柜' }]"
+          :filters="[{ text: getStr1, value: getStr1 }, { text: getStr2, value: getStr2 },{ text: getStr3, value: getStr3 }]"
           :filter-method="filterTag1"
           filter-placement="bottom-end"
         >
@@ -71,7 +71,7 @@
         </el-table-column>
         <!-- 二级筛选 -->
         <el-table-column
-          :filters="[{ text: '工厂用电', value: '工厂用电' }, { text: '照明用电', value: '照明用电' },{ text: '其他', value: '其他' }]"
+          :filters="[{ text: getStr4, value: getStr4 }, { text: getStr5, value: getStr5},{ text: getStr6, value: getStr6 }]"
           :filter-method="filterTag2"
           filter-placement="bottom-end"
           align="center"
@@ -267,6 +267,7 @@ export default {
           ]
         }
       ];
+      this.dialogVisible = false;
     },
     // 修改分类
     ig() {

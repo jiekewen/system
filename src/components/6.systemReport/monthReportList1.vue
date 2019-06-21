@@ -48,12 +48,12 @@
             <el-table-column align="center" property="eidDescription" label="项目名称"></el-table-column>
             <el-table-column align="center" property="ncount" label="接入设备"></el-table-column>
             <el-table-column align="center" property="ecount" label="设备总数"></el-table-column>
-            <el-table-column align="center" property="alerm1" label="报警类型1"></el-table-column>
-            <el-table-column align="center" property="alermCount1" label="报警次数1"></el-table-column>
-            <el-table-column align="center" property="alerm2" label="报警类型2"></el-table-column>
-            <el-table-column align="center" property="alermCount2" label="报警次数2"></el-table-column>
-            <el-table-column align="center" property="alerm3" label="报警类型3"></el-table-column>
-            <el-table-column align="center" property="alermCount3" label="报警次数3"></el-table-column>
+            <el-table-column align="center" property="alerm1" label="报警类型(1)"></el-table-column>
+            <el-table-column align="center" property="alermCount1" label="报警次数(1)"></el-table-column>
+            <el-table-column align="center" property="alerm2" label="报警类型(2)"></el-table-column>
+            <el-table-column align="center" property="alermCount2" label="报警次数(2)"></el-table-column>
+            <el-table-column align="center" property="alerm3" label="报警类型(3)"></el-table-column>
+            <el-table-column align="center" property="alermCount3" label="报警次数(3)"></el-table-column>
           </el-table>
         </el-dialog>
       </div>

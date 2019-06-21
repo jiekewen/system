@@ -66,6 +66,7 @@
           <!-- 完成时间 -->
           <el-form-item label="完成时间 :">
             <el-date-picker
+              disabledDate="zz"
               v-model="planFormData.completetime"
               type="datetime"
               placeholder="选择日期"
@@ -155,6 +156,9 @@ export default {
     this.initial();
   },
   methods: {
+    zz(val) {
+      console.log("val", val);
+    },
     // 计划初始值
     initial(value) {
       this.fData = JSON.parse(sessionStorage.getItem("formData"));
@@ -170,7 +174,7 @@ export default {
       // 执行人
       this.planFormData.user = this.fData.operator;
       // 隐患数
-      this.planFormData.count = this.fData.dangernum;
+      // this.planFormData.count = this.fData.dangernum;
     },
     // 巡检是否执行
     radioChange(val) {
@@ -223,16 +227,21 @@ export default {
             sendData.taskname = this.planFormData.name;
             // 巡检类型
             sendData.type = this.checkCurrent;
-            console.log("sendData", sendData);
-
             this.$http
               .post("patrol/updatePatrolRecord", sendData)
               .then(res => {
-                this.$alert("保存成功", "新增计划保存成功", {
-                  confirmButtonText: "确定"
-                }).then(() => {
-                  window.history.back();
-                });
+                if (res.data.code == 1) {
+                  this.$alert("保存失败", res.data.data, {
+                    confirmButtonText: "确定"
+                  });
+                  return false;
+                } else {
+                  this.$alert("保存成功", "新增计划保存成功", {
+                    confirmButtonText: "确定"
+                  }).then(() => {
+                    window.history.back();
+                  });
+                }
               })
               .catch(err => {
                 this.$alert("保存失败", "新增计划保存失败", {

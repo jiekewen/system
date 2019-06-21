@@ -1,14 +1,17 @@
+
 <template>
-  <div class="knowledge">knowledge.vue</div>
+  <div class="knowledge">knowledge</div>
 </template>
 <script>
 export default {
-  name: "Knowledge",
   data() {
     return {};
-  }
+  },
+  created() {},
+  mounted() {},
+  methods: {}
 };
 </script>
-<style lang="less" scoped>
+<style lang="less" scope>
 @import "../../assets/css/8.knowledge/knowledge";
 </style>

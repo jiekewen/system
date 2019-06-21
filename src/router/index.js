@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '../views/login' //登陆  
+
+
 import Home from '../views/home/home' //主组件
 // 引入nav组件
 import HomePage from '../components/1.homePage/homePage' //首页
@@ -120,14 +122,14 @@ export default new Router({
           component: ExecutePlan,
         },
         {
-          name: '知识库',
-          path: '/knowledge',
-          component: Knowledge,
-        },
-        {
           name: '分类设置',
           path: '/sortConfig',
           component: SortConfig,
+        },
+        {
+          name: '知识库',
+          path: '/knowledge',
+          component: Knowledge,
         },
         {
           name: '用户设置',

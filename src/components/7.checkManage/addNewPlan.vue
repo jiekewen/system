@@ -79,7 +79,12 @@ export default {
       // 禁选范围
       pickerOptions1: {
         disabledDate: time => {
-          return time.getTime() < new Date(this.planFormData.formatcreatetime);
+          if (this.planFormData.formatcreatetime != "") {
+            const gDate = new Date(this.planFormData.formatcreatetime);
+            return (
+              time.getTime() < new Date(gDate.setDate(gDate.getDate() - 1))
+            );
+          }
         }
       },
       // 提交数据

@@ -21,7 +21,7 @@
           <el-table-column prop="operator" label="巡检人"></el-table-column>
           <el-table-column prop="starttime" label="开始时间"></el-table-column>
           <el-table-column prop="endtime" label="结束时间"></el-table-column>
-          <el-table-column prop="createtime" label="创建时间"></el-table-column>
+          <el-table-column style="overflow-x:scroll" prop="createtime" label="创建时间"></el-table-column>
           <el-table-column width="120" fixed="right" label="巡检计划操作">
             <template slot-scope="scope">
               <el-button
@@ -105,6 +105,7 @@
                 range-separator="至"
                 start-placeholder="开始日期"
                 end-placeholder="结束日期"
+                :picker-options="pickerOptions1"
               ></el-date-picker>
             </el-form-item>
             <!-- 执行人 -->
@@ -138,6 +139,17 @@ export default {
   data() {
     return {
       // 弹窗数据
+      // 禁选范围
+      pickerOptions1: {
+        disabledDate: time => {
+          if (this.planFormData.formatcreatetime != "") {
+            const gDate = new Date(this.planFormData.formatcreatetime);
+            return (
+              time.getTime() < new Date(gDate.setDate(gDate.getDate() - 1))
+            );
+          }
+        }
+      },
       // 提交数据
       planFormData: {
         eid: "", // 项目名称
@@ -230,6 +242,8 @@ export default {
     },
     // 表格修改
     recompose(index, row) {
+      // 创建时间
+      this.planFormData.formatcreatetime = this.tableData[index].createtime;
       this.dialogFormVisible = true;
       // 计划名称
       this.planFormData.name = this.tableData[index].taskname;

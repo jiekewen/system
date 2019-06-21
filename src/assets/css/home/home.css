@@ -41,6 +41,7 @@ body .home .main {
   height: 100vh;
   background-color: #E2E2E2;
   min-width: 800px;
+  overflow-y: auto;
 }
 html .home .main .header,
 body .home .main .header {

@@ -6,20 +6,98 @@ body {
 
 // 登陆界面
 .login {
-  width: 100vw;
   position: relative;
-  height: 100vh;
-  text-align: center;
-  background: url(../../images/login/loginbg.jpg) no-repeat left;
+  width: 100%;
+  height: 100%;
+  background-image: url(../../images/login/login-bg.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  min-height: 700px;
+  // 上半部分
 
-  // 提交页面
-  .login-submit {
-    position: absolute;
-    padding-top: 10%;
-    top: 20%;
-    left: 40%;
-    width: 432px;
-    height: 311px;
-    background: url(../../images/login/u0.png)no-repeat center;
+  .login-top {
+    position: relative;
+
+    // 项目标题
+    .login-title {
+      position: absolute;
+      top: 40vh;
+      left: 24vw;
+
+      p {
+        font-size: 2vw;
+        text-shadow: 1px 1px #fff;
+      }
+    }
+
+    // 提交页面
+    .login-submit {
+      padding: 2% 3%;
+      position: absolute;
+      border-radius: 2%;
+      width: 13vw;
+      min-width: 200px;
+      height: 33vh;
+      min-height: 300px;
+      top: 20vh;
+      right: 10vw;
+      border: 1px solid #333;
+      background-color: #fff;
+
+      // 电气安全云平台
+      .submit-title {
+        font-size: 22px;
+        height: 6vh;
+      }
+
+
+      // 用户名
+      .submit-user {
+        margin: 5% auto;
+
+        .el-input_user {
+
+          img {
+            margin-top: 1px;
+            margin-left: -4px;
+          }
+        }
+      }
+
+      // 密码
+      .submit-passWord {
+        margin-top: 10%;
+
+        .el-input_password {
+          img {
+            margin-top: 1px;
+            margin-left: -4px;
+          }
+        }
+      }
+
+      // 登录按钮
+      .submit-elBtn {
+        margin-top: 20%;
+        margin-left: 0.8vw;
+        padding: 12px 5vw;
+      }
+    }
   }
+
+  // 下半部分
+  .login-bottom {
+    text-align: center;
+    position: absolute;
+    bottom: 5vh;
+    left: 20vw;
+    width: 60vw;
+    height: 60px;
+    line-height: 60px;
+    border-top: 1px solid #888;
+    font-size: 14px;
+    color: #888;
+  }
+
 }
