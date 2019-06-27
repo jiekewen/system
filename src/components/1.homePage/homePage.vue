@@ -101,14 +101,15 @@ export default {
       this.websock.onclose = this.websocketclose;
     },
     websocketonopen() {
-      console.log("WebSocket连接成功");
+      console.log("WebSocket连接打开");
     },
     websocketonerror() {
+      console.log("连接中断，重连中");
       //连接建立失败重连++++
       this.initWebSocket();
     },
     websocketonmessage(e) {
-      // console.log("连接数据");
+      console.log("接收数据成功");
       const resData = JSON.parse(e.data);
       // 接收数据
       if (resData.oCount != undefined && resData.oCount != 0) {
@@ -130,7 +131,7 @@ export default {
   computed: {
     // 计算百分比保留两位小数
     toPercent() {
-      if (this.allLine != 0) {
+      if (this.allLine != 0 && this.allLine != undefined) {
         return ((this.allLine - this.outLine) / this.allLine).toFixed(2);
       } else {
         return 0;

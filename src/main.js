@@ -23,6 +23,12 @@ Vue.prototype.$echarts = echarts;
 import store from './store/index.js'
 import Vuex from 'vuex'
 Vue.use(Vuex)
+// 引入百度vue - baidu - map插件
+import BaiduMap from 'vue-baidu-map'
+
+Vue.use(BaiduMap, {
+  ak: '4IU3oIAMpZhfWZsMu7xzqBBAf6vMHcoa'
+})
 
 Vue.config.productionTip = false
 new Vue({

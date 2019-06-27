@@ -1,6 +1,7 @@
 <template>
   <!-- 报警列表 -->
   <div class="alermList">
+    <!-- 滚动列表 -->
     <marquee
       onMouseOut="this.start()"
       onMouseOver="this.stop()"
@@ -31,8 +32,7 @@ export default {
       zz4: "",
       // 报警数据
       tableData: [],
-      tableData1: [],
-      tableData2: [],
+      // 获取数据的报警时间
       tableTime: []
     };
   },
@@ -41,7 +41,6 @@ export default {
     const count = { amount: 8 };
     this.$http.get("homePage/getAlarmsByLimit", { params: count }).then(res => {
       this.tableData = res.data.data;
-      this.tableData1 = this.tableData.slice(0, 4);
       this.tableData.forEach(element => {
         var a = element.switchhouse;
         var b = element.category;
@@ -51,16 +50,15 @@ export default {
         time = time.replace("T", " ").split(".")[0];
         this.tableTime.push(time, a, b, c, d); //时间，区域，类别,测点,报警类型
       });
-      // console.log("this.tableTime", this.tableTime);
       this.zz1 = this.sliceArr(0, 5, this.tableTime);
       this.zz2 = this.sliceArr(5, 10, this.tableTime);
       this.zz3 = this.sliceArr(10, 15, this.tableTime);
       this.zz4 = this.sliceArr(15, 20, this.tableTime);
-      this.tableData2 = this.tableData.slice(4, this.tableData.length);
     });
   },
   methods: {
     alermPush() {
+      // 点击跳转消息列表
       this.$router.push("/messageList");
     },
     // 分割数组
@@ -78,9 +76,11 @@ export default {
 <style lang="less" scoped>
 .alermList {
   text-align: center;
+  // 滚动盒子
   .roll-box {
     display: flex;
     cursor: pointer;
+    // 盒子内部样式
     .tebie {
       height: 4vh;
       line-height: 4vh;
