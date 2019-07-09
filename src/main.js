@@ -13,7 +13,12 @@ import qs from 'qs'
 Vue.prototype.$qs = qs
 Vue.prototype.$http = axios
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded; charset=UTF-8'
+// 线上请求头
 axios.defaults.baseURL = 'http://101.201.73.248:8002/netgate-server/'
+// 本地请求头
+// axios.defaults.baseURL = 'http://192.168.0.219:8002/netgate-server'
+let token = localStorage.getItem('token') || '';
+axios.defaults.headers.common['token'] = token;
 // 导入依赖包，解决ie不支持es6语法的兼容性问题
 import "babel-polyfill"
 // 引入echarts
@@ -29,7 +34,15 @@ import BaiduMap from 'vue-baidu-map'
 Vue.use(BaiduMap, {
   ak: '4IU3oIAMpZhfWZsMu7xzqBBAf6vMHcoa'
 })
-
+//路由守卫
+router.beforeEach((to, from, next) => {
+  if (to.path == '/login' || to.path == '/register') {
+    next();
+  } else {
+    alert('您还没有登录，请先登录');
+    next('/login');
+  }
+})
 Vue.config.productionTip = false
 new Vue({
   el: '#app',

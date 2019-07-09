@@ -191,9 +191,16 @@ export default {
     this.pageNo = Number(sessionStorage.getItem("currentPage")) || 1;
     this.pageChange(this.pageNo);
     // 获取列表总数
-    this.$http.get("set/equipmentCount").then(response => {
-      this.pageTotal = response.data.data;
-    });
+    this.$http
+      .get("set/equipmentCount")
+      .then(response => {
+        console.log("response", response);
+
+        this.pageTotal = response.data.data;
+      })
+      .catch(err => {
+        console.log("err", err);
+      });
     // 列表数据
     this.getTableList();
   },

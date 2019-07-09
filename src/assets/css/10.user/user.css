@@ -1,5 +1,6 @@
 .user {
   margin: 1%;
+  height: 86vh;
   background-color: #fff;
 }
 .user .form-submit1 .submit1-h4 {
@@ -7,12 +8,12 @@
   border-bottom: 1px solid #666;
 }
 .user .form-submit1 .form-submit2 {
-  width: 30%;
+  width: 410px;
   background-color: #fff;
   padding: 50px;
 }
 .user .form-submit1 .form-submit2 .form-item-btn {
-  display: flex;
+  text-align: center;
   width: 400px;
 }
 .user .form-submit1 .form-submit2 .form-item-btn .confirm {

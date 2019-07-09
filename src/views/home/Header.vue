@@ -12,11 +12,11 @@
     <!-- 个人中心 -->
     <div class="Header-box3">
       <router-link :to="{ path: '/messageList' }">
-        <img src="../../assets/images/home/alerm-count-icon.png" alt>
+        <img src="../../assets/images/home/alerm-count-icon.png" alt />
         <!-- 报警数量 -->
         <el-badge :value="alerm.count" class="item-badge"></el-badge>
       </router-link>
-      <img src="../../assets/images/home/user-icon.png" alt>
+      <img src="../../assets/images/home/user-icon.png" alt />
       <el-dropdown size="small" placement="bottom-start" trigger="click">
         <!-- 登录人 -->
         <button class="user-name-btn">
@@ -25,16 +25,16 @@
         </button>
         <el-dropdown-menu style="margin-top:-20px" slot="dropdown">
           <el-dropdown-item style="border-bottom:1px solid #ccc;">
-            <router-link :to="{ path: '/user' }">个人中心</router-link>
+            <button style="background-color:#fff;border: none;" @click="personal">个人中心</button>
           </el-dropdown-item>
           <el-dropdown-item>
-            <router-link :to="{ path: '/' }">退出登录</router-link>
+            <button style="background-color:#fff;border: none;" @click="logOut">退出登录</button>
           </el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <!-- 超级用户按钮 -->
       <button @click="tableShow" class="control-btn">
-        <img src="../../assets/images/home/set-message-icon.png" alt>
+        <img src="../../assets/images/home/set-message-icon.png" alt />
       </button>
     </div>
   </div>
@@ -63,6 +63,18 @@ export default {
   methods: {
     tableShow() {
       this.$router.push("/tableShow");
+    },
+    // 退出登录
+    logOut() {
+      localStorage.removeItem("token");
+      localStorage.removeItem("user");
+      localStorage.removeItem("password");
+      localStorage.removeItem("id");
+      this.$router.push("/login");
+    },
+    // 跳转个人中心
+    personal() {
+      this.$router.push("/user");
     }
   }
 };

@@ -30,8 +30,12 @@ Vue.use(Router)
 export default new Router({
   // mode: "history", //去掉#
   routes: [{
-      name: 'login',
       path: '/',
+      redirect: '/home'
+    },
+    {
+      name: 'login',
+      path: '/login',
       component: Login,
     },
     // 报表打印界面
@@ -51,22 +55,38 @@ export default new Router({
           name: '首页',
           path: '/homePage',
           component: HomePage,
+          meta: {
+            requiresAuth: true //是否进行登录验证
+          }
+
         },
         {
           name: '数据监控',
           path: '/dataMonitor',
           component: DataMonitor,
+          meta: {
+            requiresAuth: true //是否进行登录验证
+          }
+
         },
         // 报警管理
         {
           name: '消息列表',
           path: '/messageList',
           component: MessageList,
+          meta: {
+            requiresAuth: true //是否进行登录验证
+          }
+
         },
         {
           name: '报警配置',
           path: '/alarmConfig',
           component: AlarmConfig,
+          meta: {
+            requiresAuth: true //是否进行登录验证
+          }
+
         },
         {
           name: 'alarmAdd',
@@ -87,27 +107,47 @@ export default new Router({
           name: '数据分析',
           path: '/dataAnalysis',
           component: DataAnalysis,
+          meta: {
+            requiresAuth: true //是否进行登录验证
+          }
+
         },
         {
           name: '系统日志',
           path: '/systemLog',
           component: SystemLog,
+          meta: {
+            requiresAuth: true //是否进行登录验证
+          }
+
         },
         {
           name: '系统报表',
           path: '/systemReport',
           component: SystemReport,
+          meta: {
+            requiresAuth: true //是否进行登录验证
+          }
+
         },
         //巡检管理
         {
           name: '巡检日历',
           path: '/checkCalendar',
           component: CheckCalendar,
+          meta: {
+            requiresAuth: true //是否进行登录验证
+          }
+
         },
         {
           name: '巡检计划',
           path: '/checkPlan',
           component: CheckPlan,
+          meta: {
+            requiresAuth: true //是否进行登录验证
+          }
+
         },
         // 新增巡检计划
         {
@@ -125,16 +165,32 @@ export default new Router({
           name: '分类设置',
           path: '/sortConfig',
           component: SortConfig,
+          meta: {
+            requiresAuth: true //是否进行登录验证
+          }
+
         },
         {
           name: '知识库',
           path: '/knowledge',
           component: Knowledge,
+          meta: {
+            requiresAuth: true //是否进行登录验证
+          }
+
         },
         {
           name: '用户设置',
           path: '/user',
           component: User,
+          meta: {
+            requiresAuth: true //是否进行登录验证
+          }
+        },
+        // 错误路由重定向
+        {
+          path: '**',
+          redirect: '/home'
         }
       ]
     }

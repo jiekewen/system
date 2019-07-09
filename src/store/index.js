@@ -3,8 +3,6 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
-    // data
-    user: "admin",
     // 报表界面的层级选择器
     handleChangeData: "",
     // 在线设备

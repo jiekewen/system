@@ -11,13 +11,24 @@
         <form :model="formData">
           <el-input
             @keyup.enter.native="handleLogin"
+            v-model="formData.eid"
+            class="submit-user"
+            size="medium"
+            placeholder="请输入您的EID"
+          >
+            <i slot="prefix" class="el-input_user">
+              <img src="../../src/assets/images/login/login-user.png" alt />
+            </i>
+          </el-input>
+          <el-input
+            @keyup.enter.native="handleLogin"
             v-model="formData.username"
             class="submit-user"
             size="medium"
             placeholder="请输入您的用户名"
           >
             <i slot="prefix" class="el-input_user">
-              <img src="../../src/assets/images/login/login-user.png" alt>
+              <img src="../../src/assets/images/login/login-user.png" alt />
             </i>
           </el-input>
           <el-input
@@ -29,7 +40,7 @@
             placeholder="请输入您的密码"
           >
             <i slot="prefix" class="el-input_password">
-              <img src="../../src/assets/images/login/login-password.png" alt>
+              <img src="../../src/assets/images/login/login-password.png" alt />
             </i>
           </el-input>
           <el-button type="danger" @click="handleLogin" class="submit-elBtn">登录</el-button>
@@ -52,27 +63,44 @@ export default {
     return {
       // 用户名密码
       formData: {
-        username: "",
-        password: ""
+        eid: "Root",
+        username: "Admin",
+        password: "a123456"
       }
     };
   },
   methods: {
     // 提交判断
     handleLogin() {
-      if (this.formData.username !== "test") {
-        this.$alert("请输入正确用户名", "用户名不存在", {
+      if (this.formData.eid == "") {
+        this.$alert("请输入EID", "EID不能为空", {
           confirmButtonText: "确定"
         });
         return false;
-      } else if (this.formData.password !== "123456") {
-        this.$alert("请输入正确密码", "你输入的密码不正确", {
+      } else if (this.formData.username == "") {
+        this.$alert("请输入用户名", "用户名不能为空", {
+          confirmButtonText: "确定"
+        });
+        return false;
+      } else if (this.formData.password == "") {
+        this.$alert("请输入密码", "密码不能为空", {
           confirmButtonText: "确定"
         });
         return false;
       } else {
-        // sessionStorage.setItem("user", JSON.stringify(this.formData));
-        this.$router.push("/home");
+        localStorage.setItem("user", this.formData.username);
+        localStorage.setItem("password", this.formData.password);
+        this.$http
+          .post("user/login", this.formData)
+          .then(res => {
+            localStorage.setItem("token", res.data.data.webtoken);
+            localStorage.setItem("id", res.data.data.id);
+            this.$router.push("/home");
+            location.reload();
+          })
+          .catch(err => {
+            localStorage.removeItem("token");
+          });
       }
     }
   }

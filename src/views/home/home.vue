@@ -4,7 +4,7 @@
     <div class="nav">
       <div class="navLogo">
         <!-- 导航上logo -->
-        <img src="../../assets/images/home/u8.png" alt>
+        <img src="../../assets/images/home/u8.png" alt />
       </div>
       <div class="navWrap">
         <Menu></Menu>
@@ -29,6 +29,7 @@ export default {
   data() {
     return {};
   },
+  created() {},
   components: {
     Header,
     Menu

@@ -1,11 +1,11 @@
 <template>
   <!-- 地图容器 -->
   <baidu-map
-    @click="zz(position.lng,position.lat)"
     class="map"
     :center="{lng: 116.404, lat: 39.915}"
-    :zoom="11"
+    :zoom="9"
     :scroll-wheel-zoom="true"
+    :mapStyle="mapStyle"
   >
     <!-- 光谷电气位置 -->
     <bm-marker
@@ -32,13 +32,11 @@
 export default {
   data() {
     return {
-      show: false
+      show: false,
+      mapStyle: {}
     };
   },
   methods: {
-    zz(lng, lat) {
-      console.log("lng,lat", lng, lat);
-    },
     // 文本关闭
     infoWindowClose() {
       this.show = false;
