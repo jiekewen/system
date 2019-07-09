@@ -63,9 +63,9 @@ export default {
     return {
       // 用户名密码
       formData: {
-        eid: "Root",
-        username: "Admin",
-        password: "a123456"
+        eid: "",
+        username: "",
+        password: ""
       }
     };
   },

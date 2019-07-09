@@ -76,8 +76,6 @@ export default {
     alermList
   },
   created() {
-    console.log(localStorage.getItem("token"));
-
     this.$http.get("homePage/getOnLineDays").then(res => {
       this.onLineDays = res.data.data;
     });

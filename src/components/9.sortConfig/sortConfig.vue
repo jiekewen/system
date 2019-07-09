@@ -194,8 +194,6 @@ export default {
     this.$http
       .get("set/equipmentCount")
       .then(response => {
-        console.log("response", response);
-
         this.pageTotal = response.data.data;
       })
       .catch(err => {
@@ -280,9 +278,9 @@ export default {
     ig() {
       this.dialogVisible = true;
     },
-    async getTableList() {
+    getTableList() {
       //  发送请求
-      await this.$http
+      this.$http
         .get(
           `set/equipmentListByEid?pageNum=${Number(
             sessionStorage.getItem("currentPage")

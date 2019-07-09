@@ -30,18 +30,8 @@ import Vuex from 'vuex'
 Vue.use(Vuex)
 // 引入百度vue - baidu - map插件
 import BaiduMap from 'vue-baidu-map'
-
 Vue.use(BaiduMap, {
   ak: '4IU3oIAMpZhfWZsMu7xzqBBAf6vMHcoa'
-})
-//路由守卫
-router.beforeEach((to, from, next) => {
-  if (to.path == '/login' || to.path == '/register') {
-    next();
-  } else {
-    alert('您还没有登录，请先登录');
-    next('/login');
-  }
 })
 Vue.config.productionTip = false
 new Vue({

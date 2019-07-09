@@ -24,12 +24,15 @@
           <i class="el-icon-arrow-down"></i>
         </button>
         <el-dropdown-menu style="margin-top:-20px" slot="dropdown">
-          <el-dropdown-item style="border-bottom:1px solid #ccc;">
-            <button style="background-color:#fff;border: none;" @click="personal">个人中心</button>
+          <el-dropdown-item style="border-bottom:1px solid #ccc;padding:0;">
+            <button
+              style="background-color:#fff;border: none;width:95px;height:30px;cursor:pointer;"
+              @click="personal"
+            >个人中心</button>
           </el-dropdown-item>
-          <el-dropdown-item>
-            <button style="background-color:#fff;border: none;" @click="logOut">退出登录</button>
-          </el-dropdown-item>
+          <button style="background-color:#fff;border: none;" @click="logOut">
+            <el-dropdown-item>退出登录</el-dropdown-item>
+          </button>
         </el-dropdown-menu>
       </el-dropdown>
       <!-- 超级用户按钮 -->
@@ -51,6 +54,7 @@ export default {
   },
   components: {},
   created() {
+    this.$store.state.user = localStorage.getItem("user");
     // 获取报警数量
     this.$http.get("homePage/UnReadCount").then(res => {
       this.alerm.count = res.data.data;
@@ -61,9 +65,7 @@ export default {
       });
   },
   methods: {
-    tableShow() {
-      this.$router.push("/tableShow");
-    },
+    tableShow() {},
     // 退出登录
     logOut() {
       localStorage.removeItem("token");

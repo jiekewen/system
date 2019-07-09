@@ -27,11 +27,17 @@ import AlarmAmend from '../components/3.dangerAlarm/alarmAmend' //报警配置--
 
 Vue.use(Router)
 
-export default new Router({
+const route = new Router({
   // mode: "history", //去掉#
-  routes: [{
+  routes: [
+    // 错误路由重定向
+    {
+      path: '*',
+      redirect: '/home',
+
+    }, {
       path: '/',
-      redirect: '/home'
+      redirect: '/login'
     },
     {
       name: 'login',
@@ -187,12 +193,26 @@ export default new Router({
             requiresAuth: true //是否进行登录验证
           }
         },
-        // 错误路由重定向
-        {
-          path: '**',
-          redirect: '/home'
-        }
+
       ]
     }
   ]
 })
+//路由守卫
+route.beforeEach((to, from, next) => {
+  let userinfo = localStorage.getItem('token');
+  if (userinfo) {
+    next();
+  } else {
+    //注意加个判断否则陷入死循环
+    if (to.path == '/login') { //如果是登录页面路径，就直接next()
+      next();
+    } else { //不然就跳转到登录；
+      alert("请先登录")
+      next({
+        name: 'login'
+      }); //next('/login');next({path:'/login'}) 三种写法
+    }
+  }
+})
+export default route
